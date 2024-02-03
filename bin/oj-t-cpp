@@ -1,0 +1,13 @@
+#!/usr/bin/sh
+	test_file=$1
+	echo "--- oj test cpp ---"
+	echo "$(pwd)/"$test_file
+	echo "--- oj test cpp ---"
+	g++ -std=c++17 -O2 -Wall -Wextra -DONLINE_JUDGE $test_file
+	timeout 3 oj t -c "timeout 2 ./a.out"
+	echo "--- oj test cpp ---"
+	echo "$ g++ -std=c++17 -O2 -Wall -Wextra -DONLINE_JUDGE $test_file"
+	echo '$ timeout 3 oj t -c "timeout 2 ./a.out"'
+	echo "--- oj test cpp ---"
+	echo "$(pwd)/"$test_file
+	echo "--- oj test cpp ---"

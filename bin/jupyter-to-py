@@ -1,0 +1,6 @@
+#!/usr/bin/env node
+const fs = require('fs');
+let text = fs.readFileSync("/dev/stdin", "utf-8");
+const json = JSON.parse(text);
+const python_codes = json.cells.reduce((codes, elem) => ((elem.cell_type == "code") ? codes.concat(elem.source, ["\n"]) : codes), [])
+console.log(python_codes.join(''))

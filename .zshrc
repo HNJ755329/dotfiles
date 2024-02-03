@@ -62,6 +62,7 @@ function load-nvm () {
 . "$HOME/.cargo/env"
 
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+export PATH="$HOME/dotfiles/bin:$PATH"
 
 
 # Path to your oh-my-zsh installation.

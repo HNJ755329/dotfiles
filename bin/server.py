@@ -1,0 +1,205 @@
+#!/usr/bin/env python
+# import http.server
+import contextlib
+import html
+import io
+import os
+import socket  # For gethostbyaddr()
+import sys
+import urllib.parse
+from functools import partial
+from http import HTTPStatus
+from http.server import (CGIHTTPRequestHandler, SimpleHTTPRequestHandler,
+                         ThreadingHTTPServer, test)
+
+import pdf2image
+
+
+def pdf_to_thumnail(path, save_name, folder="./", H=191):
+    images = pdf2image.convert_from_path(
+        path,
+        size=(None, H),
+        single_file=True,
+        fmt="jpeg",
+        output_folder=folder,
+        output_file=save_name,
+    )
+
+
+class MyHTTPRequestHandler(SimpleHTTPRequestHandler):
+    def list_directory(self, path):
+        """Helper to produce a directory listing (absent index.html).
+        Return value is either a file object, or None (indicating an
+        error).  In either case, the headers are sent, making the
+        interface the same as for send_head().
+        """
+        try:
+            elm_list = os.listdir(path)
+        except OSError:
+            self.send_error(HTTPStatus.NOT_FOUND, "No permission to list directory")
+            return None
+        elm_list.sort(key=lambda a: a.lower())
+        r = []
+        try:
+            displaypath = urllib.parse.unquote(self.path, errors="surrogatepass")
+        except UnicodeDecodeError:
+            displaypath = urllib.parse.unquote(path)
+        displaypath = html.escape(displaypath, quote=False)
+        enc = sys.getfilesystemencoding()
+        title = "Directory listing for %s" % displaypath
+        r.append(
+            '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" '
+            '"http://www.w3.org/TR/html4/strict.dtd">'
+        )
+        r.append("<html>\n<head>")
+        r.append(
+            '<meta http-equiv="Content-Type" ' 'content="text/html; charset=%s">' % enc
+        )
+        r.append("<title>%s</title>\n</head>" % title)
+        r.append("<style>img{height:240px}</style>")
+        r.append("<body>\n<h1>%s</h1>" % title)
+        r.append("<hr>\n<ul>")
+        r.append('<div style="float:left">')
+        r_dir = []
+        r_link = []
+        r_file = []
+        r_img = []
+
+        r_dir.append('<li><a href="../">□ ../</a></li>')
+
+        for name in elm_list:
+            # 隠しフォルダを表示しない．
+            # if name[0] == ".":
+            # continue
+            #
+            fullname = os.path.join(path, name)
+            displayname = linkname = name
+            # Append / for directories or @ for symbolic links
+            if os.path.isdir(fullname):
+                if name[0] == ".":
+                    displayname = "[=] " + name + "/"
+                else:
+                    displayname = "[D] " + name + "/"
+                linkname = name + "/"
+                r_dir.append(
+                    '<li><a href="%s">%s</a></li>'
+                    % (
+                        urllib.parse.quote(linkname, errors="surrogatepass"),
+                        html.escape(displayname, quote=False),
+                    )
+                )
+            elif os.path.islink(fullname):
+                displayname = "[L] " + name + "@"
+                r_link.append(
+                    '<li><a href="%s">%s</a></li>'
+                    % (
+                        urllib.parse.quote(linkname, errors="surrogatepass"),
+                        html.escape(displayname, quote=False),
+                    )
+                )
+                # Note: a link to a directory displays with @ and links with /
+            else:
+                r_file.append(
+                    '<li><a href="%s">%s</a></li>'
+                    % (
+                        urllib.parse.quote(linkname, errors="surrogatepass"),
+                        html.escape(displayname, quote=False),
+                    )
+                )
+                # ---- My Settings ----
+                base, extension = os.path.splitext(name)
+                if extension in [".png", ".jpg", ".jpeg"]:
+                    quote_path = urllib.parse.quote(linkname, errors="surrogatepass")
+                    r_img.append(
+                        '<a href="%s"><img src="%s"></img></a>'
+                        % (quote_path, quote_path)
+                    )
+                elif extension in [".pdf"]:
+                    quote_path = urllib.parse.quote(linkname, errors="surrogatepass")
+                    head, tail = os.path.split(quote_path)
+                    thumnail_path = os.path.join(
+                        head, ".organizer", "!" + base + "~pdf!00001N.jpg"
+                    )
+                    os.makedirs(os.path.join(path, ".organizer/"), exist_ok=True)
+                    if not os.path.isfile(path + thumnail_path):
+                        try:
+                            pdf_to_thumnail(
+                                fullname,
+                                "!" + base + "~pdf!00001N",
+                                os.path.join(path, ".organizer"),
+                            )
+                            r_img.append(
+                                '<a href="%s"><img src="%s"></img></a>'
+                                % (quote_path, thumnail_path)
+                            )
+                        except Exception as e:
+                            print(e, name)
+                    else:
+                        r_img.append(
+                            '<a href="%s"><img src="%s"></img></a>'
+                            % (quote_path, thumnail_path)
+                        )
+        r += r_dir
+        r += r_link
+        r += r_file
+        r.append("</div>")
+        r += r_img
+        r.append('<div style="clear:left"></div>')
+        # ---- My Setting ----
+        r.append("</ul>\n<hr>\n</body>\n</html>\n")
+        encoded = "\n".join(r).encode(enc, "surrogateescape")
+        f = io.BytesIO()
+        f.write(encoded)
+        f.seek(0)
+        self.send_response(HTTPStatus.OK)
+        self.send_header("Content-type", "text/html; charset=%s" % enc)
+        self.send_header("Content-Length", str(len(encoded)))
+        self.end_headers()
+        return f
+
+
+if __name__ == "__main__":
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--cgi", action="store_true", help="Run as CGI Server")
+    parser.add_argument(
+        "--bind",
+        "-b",
+        metavar="ADDRESS",
+        help="Specify alternate bind address " "[default: all interfaces]",
+    )
+    parser.add_argument(
+        "--directory",
+        "-d",
+        default=os.getcwd(),
+        help="Specify alternative directory " "[default:current directory]",
+    )
+    parser.add_argument(
+        "port",
+        action="store",
+        default=8000,
+        type=int,
+        nargs="?",
+        help="Specify alternate port [default: 8000]",
+    )
+    args = parser.parse_args()
+    if args.cgi:
+        handler_class = CGIHTTPRequestHandler
+    else:
+        handler_class = partial(MyHTTPRequestHandler, directory=args.directory)
+
+    # ensure dual-stack is not disabled; ref #38907
+    class DualStackServer(ThreadingHTTPServer):
+        def server_bind(self):
+            # suppress exception when protocol is IPv4
+            with contextlib.suppress(Exception):
+                self.socket.setsockopt(socket.IPPROTO_IPV6, socket.IPV6_V6ONLY, 0)
+            return super().server_bind()
+
+    test(
+        HandlerClass=handler_class,
+        ServerClass=DualStackServer,
+        port=args.port,
+        bind=args.bind,
+    )
