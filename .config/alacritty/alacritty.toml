@@ -1,0 +1,24 @@
+#import = [
+		#"~/.config/alacritty/themes/themes/alacritty_0_12.toml"
+#]
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[shell]
+args = ["-l", "-c", "tmux a -t 0 || tmux -u"]
+program = "/bin/zsh"
+
+[window]
+decorations = "Full"
+opacity = 0.8
+startup_mode = "Maximized"
+#dimensions = {columns = 0, lines = 0}
+padding = {x = 0, y = 0}
+
+
+#[keyboard]
+#bindings = [
+   #{ key = "Return", mods = "Control|Shift", action = "SpawnNewInstance" }
+#]
