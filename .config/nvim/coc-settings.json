@@ -1,0 +1,99 @@
+{
+	"languageserver": {
+		"clangd": {
+			"command": "clangd",
+			"filetypes": [
+				"c",
+				"cpp",
+				"objc",
+				"objcpp"
+			]
+		},
+		"haskell": {
+			"command": "haskell-language-server-wrapper",
+			"args": [
+				"--lsp"
+			],
+			"rootPatterns": [
+				"*.cabal",
+				"stack.yaml",
+				"cabal.project",
+				"package.yaml",
+				"hie.yaml"
+			],
+			"filetypes": [
+				"haskell",
+				"lhaskell"
+			],
+			"settings": {
+				"haskell": {
+					"checkParents": "CheckOnSave",
+					"checkProject": true,
+					"maxCompletions": 40,
+					"formattingProvider": "ormolu",
+					"plugin": {
+						"stan": {
+							"globalOn": true
+						}
+					}
+				}
+			}
+		}
+	},
+	"diagnostic-languageserver.filetypes": {
+		"vim": "vint",
+		"email": "languagetool",
+		"markdown": [
+			"write-good",
+			"markdownlint"
+		],
+		"sh": "shellcheck",
+		"elixir": [
+			"mix_credo",
+			"mix_credo_compile"
+		],
+		"eelixir": [
+			"mix_credo",
+			"mix_credo_compile"
+		],
+		"php": [
+			"phpstan",
+			"psalm"
+		],
+		"yaml": [
+			"yamllint"
+		],
+		"cmake": [
+			"cmake-lint",
+			"cmakelint"
+		],
+		"systemd": "systemd-analyze"
+	},
+	"diagnostic-languageserver.formatFiletypes": {
+		"dart": "dartfmt",
+		"elixir": "mix_format",
+		"eelixir": "mix_format",
+		"python": [
+			"black",
+			"isort"
+		],
+		"lua": "lua-format",
+		"sh": "shfmt",
+		"blade": "blade-formatter",
+		"cmake": "cmake-format"
+	},
+	"jedi": {
+		"enable": true,
+		"startupMessage": true,
+		"executable.command": "/home/yasu/anaconda3/lib/python3.8/site-packages/jedi_language_server",
+		"workspace.extrapath": "/home/yasu/anaconda3/lib/python3.8/site-packages",
+		"jediSettings.autoImportModules": [
+			"numpy",
+			"pandas",
+			"matplotlib",
+			"PIL"
+		],
+		"workspace.environmentPath": "/home/yasu/anaconda3/bin/python"
+  },
+  "snippets.ultisnips.pythonPrompt": false
+}
