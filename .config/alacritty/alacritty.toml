@@ -2,6 +2,9 @@
 		#"~/.config/alacritty/themes/themes/alacritty_0_12.toml"
 #]
 
+[env]
+#TERM = "alacritty"
+
 [scrolling]
 history = 10000
 multiplier = 3
