@@ -12,9 +12,9 @@
 
 # 常にターミナルを全面に表示する
 # https://blog.so-ta.net/set-up/terminal-always-front/
-if [ "$0" = "bash" ]; then
-    /usr/bin/wmctrl -r :ACTIVE: -b add,above
-fi
+#if [ "$0" = "bash" ]; then
+    #/usr/bin/wmctrl -r :ACTIVE: -b add,above
+#fi
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -31,7 +31,7 @@ function load-conda(){
 	fi
 	unset __conda_setup
 }
-export PATH="/home/yasu/anaconda3/bin:$PATH"
+#export PATH="/home/yasu/anaconda3/bin:$PATH"
 # <<< conda initialize <<<
 
 
@@ -58,11 +58,11 @@ function load-nvm () {
 #}
 # add-zsh-hook chpwd load-nvmrc
 
-[ -f "/home/yasu/.ghcup/env" ] && source "/home/yasu/.ghcup/env" # ghcup-env
-. "$HOME/.cargo/env"
+#[ -f "/home/yasu/.ghcup/env" ] && source "/home/yasu/.ghcup/env" # ghcup-env
+#. "$HOME/.cargo/env"
 
-export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
-export PATH="$HOME/dotfiles/bin:$PATH"
+#export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+#export PATH="$HOME/dotfiles/bin:$PATH"
 
 
 # Path to your oh-my-zsh installation.
