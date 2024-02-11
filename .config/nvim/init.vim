@@ -277,7 +277,7 @@ nnoremap <expr> <F8> ':%s/\<'.expand('<cword>').'\>/<&>/g<CR>'
 nnoremap <F5> :<C-u>vsplit $MYVIMRC<CR>
 nnoremap <F6> :<C-u>source $MYVIMRC<CR>
 
-nmap <F8> :TagbarToggle<CR>
+nmap <leader>l :TagbarToggle<CR>
 inoremap jk <ESC>
 inoremap kj <ESC>
 

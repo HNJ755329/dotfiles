@@ -9,8 +9,8 @@
 	lgn = log --graph --pretty=format:'%h - %d %s %cr <%an>' --abbrev-commit --
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
 	lga = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --all --abbrev-commit --stat
-	;rst = ! git log --pretty=format:'%h - %s' | fzf | awk '{print $1}' | xargs git reset
-	;swtch = ! git branch | sed -e \"s/^.* //g\" | fzf --preview \"git log --pretty='%h - %s' {}\" | xargs git switch
+	rs = ! git log --pretty=format:'%h - %s' | fzf | awk '{print $1}' | xargs git reset
+	sw = ! git branch | sed -e \"s/^.* //g\" | fzf --preview \"git log --pretty='%h - %s' {}\" | xargs git switch
 [interactive]
     diffFilter = delta --color-only
 
