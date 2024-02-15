@@ -13,3 +13,4 @@ alias ll='exa --icons --git --group-directories-first --color-scale -snew -lhg'
 alias la='ls -A'
 alias l='ls -CF'
 alias e='xdg-open .'
+alias sp="curl -F 'sprunge=<-' http://sprunge.us"

@@ -5,3 +5,7 @@ export PATH="/home/yasu/anaconda3/bin:$PATH"
 
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 export PATH="$HOME/dotfiles/bin:$PATH"
+# xdg-ninja
+export ZDOTDIR="$HOME/.config/zsh"
+export HISTFILE="$XDG_STATE_HOME/zsh/history" 
+export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
