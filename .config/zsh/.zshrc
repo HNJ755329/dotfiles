@@ -126,7 +126,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
-HISTORY_IGNORE="(ls|cd|pwd|exit|cd ..)"
+HISTORY_IGNORE="(ll|ls|cd|pwd|exit|cd ..)"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
