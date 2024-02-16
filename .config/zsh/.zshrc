@@ -15,22 +15,23 @@
 #if [ "$0" = "bash" ]; then
     #/usr/bin/wmctrl -r :ACTIVE: -b add,above
 #fi
+compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-function load-conda(){
-	__conda_setup="$('/home/yasu/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-	if [ $? -eq 0 ]; then
-			eval "$__conda_setup"
-	else
-			if [ -f "/home/yasu/anaconda3/etc/profile.d/conda.sh" ]; then
-					. "/home/yasu/anaconda3/etc/profile.d/conda.sh"
-			else
-					export PATH="/home/yasu/anaconda3/bin:$PATH"
-			fi
-	fi
-	unset __conda_setup
-}
+#function load-conda(){
+	#__conda_setup="$('/home/yasu/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+	#if [ $? -eq 0 ]; then
+			#eval "$__conda_setup"
+	#else
+			#if [ -f "/home/yasu/anaconda3/etc/profile.d/conda.sh" ]; then
+					#. "/home/yasu/anaconda3/etc/profile.d/conda.sh"
+			#else
+					#export PATH="/home/yasu/anaconda3/bin:$PATH"
+			#fi
+	#fi
+	#unset __conda_setup
+#}
 #export PATH="/home/yasu/anaconda3/bin:$PATH"
 # <<< conda initialize <<<
 
@@ -41,10 +42,10 @@ function load-conda(){
 # ~/.zshrc
 function load-nvm () {
   if [[ $OSTYPE == "darwin"* ]]; then
-    export NVM_DIR=~/.nvm
+    export NVM_DIR=$XDG_DATA_HOME/nvm
     [[ -s $(brew --prefix nvm)/nvm.sh ]] && source $(brew --prefix nvm)/nvm.sh
   else
-    [[ -s "$HOME/.nvm/nvm.sh" ]] && source "$HOME/.nvm/nvm.sh"
+    [[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
   fi
 }
 
@@ -66,7 +67,7 @@ function load-nvm () {
 
 
 # Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+export ZSH="$XDG_DATA_HOME/oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -170,7 +171,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[[ ! -f ${ZDOTDIR:-~}/.p10k.zsh ]] || source ${ZDOTDIR:-~}/.p10k.zsh
 
 #from .bashrc
 [ -f ~/.sh_aliases ] && . ~/.sh_aliases
