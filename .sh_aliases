@@ -14,6 +14,7 @@ alias la='ls -A'
 alias l='ls -CF'
 alias e='xdg-open .'
 alias sp="curl -F 'sprunge=<-' http://sprunge.us"
+alias emacs='emacs -nw'
 
 # xdg-ninja
 alias wget='wget --hsts-file="$XDG_DATA_HOME/wget-hsts"'
