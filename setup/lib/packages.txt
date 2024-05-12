@@ -11,6 +11,7 @@ fzf
 tmux
 navi
 exa
+tree
 #--editor and envirnoment
 neovim
 emacs
