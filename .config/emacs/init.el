@@ -5,8 +5,9 @@
 ;; You may delete these explanatory comments.
 ;(package-initialize)
 
-(add-to-list 'load-path "/usr/share/emacs/site-lisp/emacs-mozc")
-(require 'mozc)
+;(add-to-list 'load-path "/usr/share/emacs/site-lisp/emacs-mozc")
+;(require 'mozc)
+(load-file "/usr/share/emacs/site-lisp/mozc.el")
 (setq default-input-method "japanese-mozc")
 (prefer-coding-system 'utf-8) 
 
@@ -31,10 +32,10 @@
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
 
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/emacs-livedown"))
-(custom-set-variables
- '(livedown-autostart nil) ; automatically open preview when opening markdown files
- '(livedown-open t)        ; automatically open the browser window
- '(livedown-port 1337)     ; port for livedown server
- '(livedown-browser nil))  ; browser to use
-(require 'livedown)
+;;(add-to-list 'load-path (expand-file-name "~/.emacs.d/emacs-Vlivedown"))
+;;(custom-set-variables
+;; '(livedown-autostart nil) ; automatically open preview when opening markdown files
+;; '(livedown-open t)        ; automatically open the browser window
+;; '(livedown-port 1337)     ; port for livedown server
+;; '(livedown-browser nil))  ; browser to use
+;;(require 'livedown)

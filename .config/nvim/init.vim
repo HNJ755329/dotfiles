@@ -176,6 +176,13 @@ function! VisualSelection(direction, extra_filter) range
 endfunction
 
 "VIM PluginList  ==============================================
+" https://github.com/junegunn/vim-plug/wiki/tips
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin()
 "Plug 'scrooloose/syntastic'
 " recommanded settings ==============================
@@ -200,15 +207,15 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'nathanaelkane/vim-indent-guides'
 
 "vim colorscheme plug
-Plug 'morhetz/gruvbox'
+"Plug 'morhetz/gruvbox'
 "Plug 'rebelot/kanagawa.nvim'
 "Plug 'arcticicestudio/nord-vim' 
 Plug 'majutsushi/tagbar'
 
 call plug#end()
-let g:gruvbox_italic=1
-colorscheme gruvbox
-set background=dark
+"let g:gruvbox_italic=1
+"colorscheme gruvbox
+"set background=dark
 "let g:airline_powerline_fonts=1
 "let g:airline_theme = 'angr'
 "let g:indent_guides_enable_on_vim_startup = 1

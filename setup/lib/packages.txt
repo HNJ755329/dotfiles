@@ -3,28 +3,34 @@
 # package / apt-get or pacman package
 # 
 #
-#--japanese input
-ibus-mozc
-# util
+#--japanese input--
+# ibus-mozc
+fcitx5-im
+fcitx5-mozc
+#--util applications--
 htop
 fzf
 tmux
 navi
 exa
 tree
-#--editor and envirnoment
+xclip
+#--editor and envirnoment--
+alacritty
 neovim
 emacs
 docker
 git
 gh
 tig
-#--languages
+#--languages--
 go
 cargo
 python
+ghcup
 # rustup
 # node
 # fnm
-#--installer
+#--installer--
 # homebrew
+# yay
