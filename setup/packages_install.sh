@@ -19,6 +19,7 @@ if command -v apt-get &>/dev/null; then
 	#:
 fi
 
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 # Loop through the packages in the list file
 while IFS= read -r package; do
 	# Check if the package needs special handling (e.g., cargo install)
@@ -44,4 +45,4 @@ while IFS= read -r package; do
 		fi
 		;;
 	esac
-done <lib/packages.txt
+done <$script_dir/lib/packages.txt
