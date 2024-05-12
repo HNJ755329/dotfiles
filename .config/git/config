@@ -28,3 +28,6 @@
 	prompt = false
 [include]
 	path = ~/.gitconfig
+[url "github:"]
+	InsteadOf = https://github.com/
+	InsteadOf = git@github.com:
