@@ -18,6 +18,10 @@ jobs:
     runs-on: ubuntu-latest
     container: archlinux:latest
     steps:
+      - name: Update packages
+        run: pacman -Syu --noconfirm
+      - name: Install required packages
+        run: pacman -S --noconfirm git sudo
       - uses: actions/checkout@master
       - name: Install util packages
         run: ./setup/packages_install.sh
