@@ -18,9 +18,8 @@ if command -v apt-get &>/dev/null; then
 	sudo apt-get update
 	#:
 elif command -v pacman &>/dev/null; then
-	sudo pacman -Syu
+	sudo pacman -Syyu --noconfirm
 fi
-
 
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 # Loop through the packages in the list file

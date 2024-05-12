@@ -19,7 +19,7 @@ jobs:
     container: archlinux:latest
     steps:
       - name: Update packages
-        run: pacman -Syu --noconfirm
+        run: pacman -Syyu --noconfirm
       - name: Install required packages
         run: pacman -S --noconfirm git sudo
       - uses: actions/checkout@master

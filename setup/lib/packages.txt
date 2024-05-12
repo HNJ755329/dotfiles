@@ -3,7 +3,7 @@
 # package / apt-get or pacman package
 # 
 #
-# japanese input
+#--japanese input
 ibus-mozc
 # util
 htop
@@ -11,19 +11,19 @@ fzf
 tmux
 navi
 exa
-# editor and envirnoment
+#--editor and envirnoment
 neovim
 emacs
 docker
 git
 gh
 tig
-# languages
+#--languages
 go
 cargo
 python
-rustup
-node
-fnm
-# installer
-homebrew
+# rustup
+# node
+# fnm
+#--installer
+# homebrew
