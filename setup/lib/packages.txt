@@ -1,3 +1,8 @@
+#
+# cargo:package / cargo install package
+# package / apt-get or pacman package
+# 
+#
 # japanese input
 ibus-mozc
 # util
@@ -17,10 +22,8 @@ tig
 go
 cargo
 python
-cargo
 rustup
 node
 fnm
 # installer
 homebrew
-
