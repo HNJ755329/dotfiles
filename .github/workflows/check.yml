@@ -7,9 +7,18 @@ jobs:
     runs-on: ubuntu-latest
     container: ubuntu:latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@master
       - name: Install required packages
         run: apt-get update && apt-get install -y git sudo
+      - name: Install util packages
+        run: ./setup/packages_install.sh
+      - name: Install dotfiles
+        run: ./setup/install.sh
+  arch:
+    runs-on: ubuntu-latest
+    container: archlinux:latest
+    steps:
+      - uses: actions/checkout@master
       - name: Install util packages
         run: ./setup/packages_install.sh
       - name: Install dotfiles
