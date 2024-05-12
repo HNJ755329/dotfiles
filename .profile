@@ -14,6 +14,7 @@ export HISTFILE="$XDG_STATE_HOME/zsh/history"
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
 export PATH="$CARGO_HOME/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/go/bin:$PATH"
 [ -f "$XDG_DATA_HOME/ghcup/env" ] && source "$XDG_DATA_HOME/ghcup/env" # ghcup-env
 . "$CARGO_HOME/env"
 # export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
@@ -46,3 +47,6 @@ export ANDROID_USER_HOME="$XDG_DATA_HOME/android"
 alias adb='HOME="$XDG_DATA_HOME"/android adb'
 
 export WINEPREFIX="$XDG_DATA_HOME"/wine
+
+#export NVM_DIR="$HOME/.local/share/nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

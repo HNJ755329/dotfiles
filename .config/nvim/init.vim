@@ -454,5 +454,7 @@ let g:coc_global_extensions =[
 			\'coc-json',
 			\'coc-pyright',
 			\'coc-docker',
+			\'coc-sh',
 			\]
 			"\'coc-jedi',
+			"
