@@ -1,0 +1,26 @@
+# japanese input
+ibus-mozc
+# util
+htop
+fzf
+tmux
+navi
+exa
+# editor and envirnoment
+neovim
+emacs
+docker
+git
+gh
+tig
+# languages
+go
+cargo
+python
+cargo
+rustup
+node
+fnm
+# installer
+homebrew
+
