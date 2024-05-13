@@ -28,6 +28,7 @@ go
 cargo
 python
 ghcup
+bash-language-server
 # rustup
 # node
 # fnm
