@@ -1,4 +1,4 @@
-alias copy='xclip -sel clip'
+# alias copy='xclip -sel clip'
 alias gxx='g++ -std=c++17 -O2 -Wall -Wextra -DONLINE_JUDGE'
 alias gdd='g++ -g -std=c++17 -O2 -Wall -Wextra -D__DEBUG__'
 alias a='./a.out'
@@ -14,7 +14,7 @@ alias la='ls -A'
 alias l='ls -CF'
 alias e='xdg-open .'
 alias sp="curl -F 'sprunge=<-' http://sprunge.us"
-# alias emacs='emacs -nw'
+alias emacs='emacs -nw'
 
 # xdg-ninja
 alias wget='wget --hsts-file="$XDG_DATA_HOME/wget-hsts"'

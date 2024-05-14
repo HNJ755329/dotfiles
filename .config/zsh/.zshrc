@@ -6,55 +6,23 @@
 #fi
 
 # zmodload zsh/zprof
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-# fi
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-
-# 常にターミナルを全面に表示する
-# https://blog.so-ta.net/set-up/terminal-always-front/
-#if [ "$0" = "bash" ]; then
-    #/usr/bin/wmctrl -r :ACTIVE: -b add,above
-#fi
 #compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-#function load-conda(){
-	#__conda_setup="$('/home/yasu/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-	#if [ $? -eq 0 ]; then
-			#eval "$__conda_setup"
-	#else
-			#if [ -f "/home/yasu/anaconda3/etc/profile.d/conda.sh" ]; then
-					#. "/home/yasu/anaconda3/etc/profile.d/conda.sh"
-			#else
-					#export PATH="/home/yasu/anaconda3/bin:$PATH"
-			#fi
-	#fi
-	#unset __conda_setup
-#}
-#export PATH="/home/yasu/anaconda3/bin:$PATH"
-# <<< conda initialize <<<
-
 
 # export NVM_DIR="$HOME/.nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-# ~/.zshrc
-function load-nvm () {
-  if [[ $OSTYPE == "darwin"* ]]; then
-    export NVM_DIR=$XDG_DATA_HOME/nvm
-    [[ -s $(brew --prefix nvm)/nvm.sh ]] && source $(brew --prefix nvm)/nvm.sh
-  else
-    [[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
-  fi
-}
+#function load-nvm () {
+  #if [[ $OSTYPE == "darwin"* ]]; then
+    #export NVM_DIR=$XDG_DATA_HOME/nvm
+    #[[ -s $(brew --prefix nvm)/nvm.sh ]] && source $(brew --prefix nvm)/nvm.sh
+  #else
+    #[[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
+  #fi
+#}
 
 #load-nvmrc() {
   #if [[ -f .nvmrc && -r .nvmrc ]]; then
@@ -67,7 +35,7 @@ function load-nvm () {
 # add-zsh-hook chpwd load-nvmrc
 
 #[ -f "/home/yasu/.ghcup/env" ] && source "/home/yasu/.ghcup/env" # ghcup-env
-#. "$HOME/.cargo/env"
+#[[ -e $HOME/.cargo/env ]] && source "$HOME/.cargo/env"
 
 #export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 #export PATH="$HOME/dotfiles/bin:$PATH"
@@ -180,12 +148,6 @@ plugins=(
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 #[[ ! -f ${ZDOTDIR:-~}/.p10k.zsh ]] || source ${ZDOTDIR:-~}/.p10k.zsh
 
-#from .bashrc
-[ -f ~/.sh_aliases ] && . ~/.sh_aliases
-[ -f ~/.sh_secret_key ] && . ~/.sh_secret_key
-[ -f ~/.sh_function ] && . ~/.sh_function
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # zprof
 #
@@ -194,7 +156,7 @@ plugins=(
 
 
 # base config for oh my zsh
-source /usr/share/oh-my-zsh/zshrc
+[[ -e /usr/share/oh-my-zsh/zshrc ]] && source /usr/share/oh-my-zsh/zshrc
 
 #p10k instant prompt to make terminal open a bit snappier
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
@@ -202,14 +164,21 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # Source manjaro config
-source ~/.zshrc
+[[ -e ~/.zshrc ]] && source ~/.zshrc
 
 # fix for comment color on manjaro zsh theme
-ZSH_HIGHLIGHT_STYLES[comment]='fg=blue'
+#ZSH_HIGHLIGHT_STYLES[comment]='fg=blue'
 
 # user-defined overrides
 [ -d ~/.config/zsh/config.d/ ] && source <(cat ~/.config/zsh/config.d/*)
 
 # Fix for foot terminfo not installed on most servers
 alias ssh="TERM=xterm-256color ssh"
-source ~/.config/user-dirs.dirs
+[[ -e ~/.config/user-dirs.dirs ]] && source ~/.config/user-dirs.dirs
+
+#from .bashrc
+#my setting is on file last
+[ -e ~/.sh_aliases ] && source ~/.sh_aliases
+[ -e ~/.sh_secret_key ] && source ~/.sh_secret_key
+[ -e ~/.sh_function ] && source ~/.sh_function
+[ -e ~/.fzf.zsh ] && source ~/.fzf.zsh

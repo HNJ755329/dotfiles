@@ -14,7 +14,8 @@ tmux
 navi
 exa
 tree
-xclip
+# xclip
+wl-clipboard
 #--editor and envirnoment--
 alacritty
 neovim
@@ -29,6 +30,7 @@ cargo
 python
 ghcup
 bash-language-server
+cargo:cargo-atcoder
 # rustup
 # node
 # fnm

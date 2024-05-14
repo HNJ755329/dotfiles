@@ -14,9 +14,9 @@ args = ["-l", "-c", "tmux a -t 0 || tmux -u"]
 program = "/bin/zsh"
 
 #it may works on xfwm4
-#[window]
+[window]
 #decorations = "Full"
-#opacity = 0.8
+opacity = 0.8
 #startup_mode = "Maximized"
 ##dimensions = {columns = 0, lines = 0}
 #padding = {x = 0, y = 0}

@@ -3,3 +3,4 @@ npm
 google-chrome-stable
 emacs-mozc
 emacs-mozc-bin
+apvlv
