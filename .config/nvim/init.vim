@@ -207,14 +207,17 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'nathanaelkane/vim-indent-guides'
 
 "vim colorscheme plug
-"Plug 'morhetz/gruvbox'
+Plug 'morhetz/gruvbox'
+"Plug 'folke/tokyonight.nvim'
 "Plug 'rebelot/kanagawa.nvim'
 "Plug 'arcticicestudio/nord-vim' 
 Plug 'majutsushi/tagbar'
 
 call plug#end()
-"let g:gruvbox_italic=1
-"colorscheme gruvbox
+let g:gruvbox_italic=1
+colorscheme gruvbox
+"colorscheme kanagawa
+"colorscheme tokyonight
 "set background=dark
 "let g:airline_powerline_fonts=1
 "let g:airline_theme = 'angr'

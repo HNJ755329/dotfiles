@@ -55,7 +55,7 @@ num-derive="0.4.0"
 #nalgebra="0.32.3"
 #alga="0.9.3"
 libm="0.2.7"
-rand="0.8.5"
+rand={version="0.8.5",features=["small_rng"]}
 #getrandom="0.2.10"
 #rand_chacha="0.3.1"
 #rand_core="0.6.4"
@@ -74,10 +74,10 @@ itertools="0.11.0"
 itertools-num="0.1.3"
 maplit="1.0.2"
 #either="1.8.1"
-im-rc="15.1.0"
+#im-rc="15.1.0"
 fixedbitset="0.4.2"
 bitset-fixed="0.1.0"
-proconio="0.4.5"
+proconio = { version = "=0.4.5", features = ["derive"] }
 #text_io="0.1.12"
 rustc-hash="1.1.0"
 #smallvec="1.11.0"
@@ -88,10 +88,10 @@ rustc-hash="1.1.0"
 
 # source code template
 template = """
-use proconio::{input,fastout};
+use ac_library::ModInt998244353 as Mint;
 use itertools::*;
+use proconio::{fastout, input};
 use tap::prelude::*;
-use ac_library::Modint998244353 as Mint;
 
 #[fastout]
 fn main() {

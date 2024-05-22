@@ -12,18 +12,23 @@ from http import HTTPStatus
 from http.server import (CGIHTTPRequestHandler, SimpleHTTPRequestHandler,
                          ThreadingHTTPServer, test)
 
-import pdf2image
-
+try:
+    import pdf2image
+except ImportError:
+    pass
 
 def pdf_to_thumnail(path, save_name, folder="./", H=191):
-    images = pdf2image.convert_from_path(
-        path,
-        size=(None, H),
-        single_file=True,
-        fmt="jpeg",
-        output_folder=folder,
-        output_file=save_name,
-    )
+    try:
+        images = pdf2image.convert_from_path(
+            path,
+            size=(None, H),
+            single_file=True,
+            fmt="jpeg",
+            output_folder=folder,
+            output_file=save_name,
+        )
+    except:
+        pass
 
 
 class MyHTTPRequestHandler(SimpleHTTPRequestHandler):

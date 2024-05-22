@@ -32,3 +32,6 @@ include /etc/sway/config.d/*
 
 # user config
 include $HOME/.config/sway/config.d/*.conf
+
+set $background $HOME/Pictures/bgs/rust-memory-container-cs-1920x1080-grey-back.png
+output * bg $HOME/Pictures/bgs/rust-memory-container-cs-1920x1080-grey-back.png fill
