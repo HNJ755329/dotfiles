@@ -18,8 +18,8 @@ program = "/bin/zsh"
 #decorations = "Full"
 opacity = 0.8
 #startup_mode = "Maximized"
-##dimensions = {columns = 0, lines = 0}
-#padding = {x = 0, y = 0}
+#dimensions = {columns = 50, lines = 50}
+padding = {x = 10, y = 10}
 
 
 #[keyboard]
