@@ -4,6 +4,8 @@
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 ;(package-initialize)
+(setq make-backup-files nil)
+(setq auto-save-default nil)
 
 ;(add-to-list 'load-path "/usr/share/emacs/site-lisp/emacs-mozc")
 ;(require 'mozc)
@@ -20,7 +22,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(markdown-preview-mode markdown-mode)))
+ '(package-selected-packages '(grip-mode markdown-preview-mode markdown-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
