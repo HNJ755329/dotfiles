@@ -1,7 +1,22 @@
+"like emacs key bindings
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+cnoremap <C-b> <Left>
+cnoremap <C-f> <Right>
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-d> <Del>
+inoremap <C-p> <Up>
+inoremap <C-n> <Down>
+inoremap <C-b> <Left>
+inoremap <C-f> <Right>
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
+inoremap <C-d> <Del>
+nnoremap x "_x
 " INTERFACE  ---------------------------------------------------{{{
 scriptencoding utf-8
 set encoding=utf-8
-set updatetime=300
 set signcolumn=yes
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
@@ -36,7 +51,6 @@ filetype plugin on
 filetype indent on
 
 " Set to auto read when a file is changed from the outside
-set autoread
 au FocusGained,BufEnter * checktime
 
 " :W sudo saves the file
@@ -93,7 +107,7 @@ syntax enable
 set list listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
 
 "Tab文字を半角スペースにする
-"set expandtab
+set expandtab
 " 行頭以外のTab文字の表示幅（スペースいくつ分）
 set tabstop=2
 " 行頭でのTab文字の表示幅
@@ -212,10 +226,13 @@ Plug 'morhetz/gruvbox'
 "Plug 'rebelot/kanagawa.nvim'
 "Plug 'arcticicestudio/nord-vim' 
 Plug 'majutsushi/tagbar'
+Plug 'norcalli/nvim-colorizer.lua'
 
 call plug#end()
 let g:gruvbox_italic=1
 colorscheme gruvbox
+set termguicolors
+lua require'colorizer'.setup()
 "colorscheme kanagawa
 "colorscheme tokyonight
 "set background=dark
@@ -288,8 +305,9 @@ nnoremap <F5> :<C-u>vsplit $MYVIMRC<CR>
 nnoremap <F6> :<C-u>source $MYVIMRC<CR>
 
 nmap <leader>l :TagbarToggle<CR>
-inoremap jk <ESC>
-inoremap kj <ESC>
+"inoremap jk <ESC>
+"inoremap jk <ESC>
+inoremap <C-c> <ESC>
 
 nmap <leader>n :NERDTreeToggle<CR>
 vmap ++ <plug>NERDCommenterToggle
