@@ -63,8 +63,7 @@ link_to_homedir() {
 					mv $homedir/$basef $backupdir
 				fi
 
-				echo "ln -sf $f $homedir"
-				command ln -sf $f $homedir
+				command ln -sfv $f $homedir
 			fi
 		done
 	else
