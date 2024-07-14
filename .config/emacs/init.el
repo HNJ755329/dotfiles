@@ -4,6 +4,9 @@
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 ;(package-initialize)
+
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 
