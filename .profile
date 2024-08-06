@@ -4,6 +4,7 @@
 # export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 export PATH="$HOME/dotfiles/bin:$PATH"
 export PATH="$HOME/.config/emacs/bin/:$PATH"
+export PATH="$HOME/.local/share/cargo/bin/:$PATH"
 # xdg
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
