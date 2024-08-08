@@ -183,4 +183,4 @@ alias ssh="TERM=xterm-256color ssh"
 [ -e ~/.sh_function ] && source ~/.sh_function
 [ -e ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-eval "$(zoxide init --cmd cd zsh)"
+[ -x zoxide ] && [ -x zsh ] && eval "$(zoxide init --cmd cd zsh)"

@@ -2,6 +2,10 @@
 		#"~/.config/alacritty/themes/themes/alacritty_0_12.toml"
 #]
 
+[font.normal]
+family = "MesloLGS NF"
+# for powerline10k
+
 [env]
 #TERM = "alacritty"
 
@@ -10,8 +14,8 @@ history = 10000
 multiplier = 3
 
 [shell]
-args = ["-l", "-c", "tmux a -t 0 || tmux -u"]
-program = "/bin/zsh"
+# args = ["-l", "-c", "tmux a -t 0 || tmux -u"]
+program = "/usr/bin/zsh"
 
 #it may works on xfwm4
 [window]
