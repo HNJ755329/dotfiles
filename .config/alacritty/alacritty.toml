@@ -2,8 +2,8 @@
 		#"~/.config/alacritty/themes/themes/alacritty_0_12.toml"
 #]
 
-[font.normal]
-family = "MesloLGS NF"
+# [font.normal]
+# family = "MesloLGS NF"
 # for powerline10k
 
 [env]
@@ -19,8 +19,8 @@ program = "/usr/bin/zsh"
 
 #it may works on xfwm4
 [window]
-#decorations = "Full"
 opacity = 0.8
+#decorations = "Full"
 #startup_mode = "Maximized"
 #dimensions = {columns = 50, lines = 50}
 padding = {x = 10, y = 10}
