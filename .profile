@@ -17,6 +17,7 @@ export CARGO_HOME="$XDG_DATA_HOME"/cargo
 # export PATH="$CARGO_HOME/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
+export PATH="$HOME/node-v20.16.0-linux-x64/bin:$PATH"
 [ -f "$XDG_DATA_HOME/ghcup/env" ] && source "$XDG_DATA_HOME/ghcup/env" # ghcup-env
 # . "$CARGO_HOME/env"
 # export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
