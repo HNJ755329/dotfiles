@@ -1,4 +1,3 @@
-# alias copy='xclip -sel clip'
 alias gxx='g++ -std=gnu++20 -O2 -Wall -Wextra -mtune=native -march=native'
 # alias gdd='g++ -g -std=c++17 -O2 -Wall -Wextra -D__DEBUG__'
 alias a='./a.out'
@@ -20,4 +19,8 @@ alias emacs='emacs -nw'
 # xdg-ninja
 alias wget='wget --hsts-file="$XDG_DATA_HOME/wget-hsts"'
 alias x='xdg-open'
-alias copy='wl-copy'
+# wayland
+# alias copy='wl-copy'
+# X
+alias copy='xclip -sel clip'
+alias kl='kaggle c list --sort-by latestDeadline'
