@@ -5,18 +5,19 @@
 #
 #--japanese input--
 # ibus-mozc
-fcitx5-im
-fcitx5-mozc
+# fcitx5-im
+# fcitx5-mozc
 #--util applications--
 htop
 fzf
 tmux
 navi
-exa
+eza
 tree
 zoxide
+#--select xlicp or wl-clipboard with own responsibility
 # xclip
-wl-clipboard
+# wl-clipboard
 #--editor and envirnoment--
 alacritty
 neovim
