@@ -3,15 +3,15 @@
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
-;(package-initialize)
+(package-initialize)
 
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 
-;(add-to-list 'load-path "/usr/share/emacs/site-lisp/emacs-mozc")
-;(require 'mozc)
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/emacs-mozc")
+(require 'mozc)
 (load-file "/usr/share/emacs/site-lisp/mozc.el")
 (setq default-input-method "japanese-mozc")
 (prefer-coding-system 'utf-8) 

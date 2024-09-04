@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/bin/env sh
 
 # Function to install packages using pacman
 install_with_pacman() {

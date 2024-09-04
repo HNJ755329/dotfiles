@@ -1,10 +1,10 @@
 # PATH settings
 #export PATH="/home/yasu/anaconda3/bin:$PATH"
 
-# export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 export PATH="$HOME/dotfiles/bin:$PATH"
-export PATH="$HOME/.config/emacs/bin/:$PATH"
-export PATH="$HOME/.local/share/cargo/bin/:$PATH"
+export PATH="$HOME/.config/emacs/bin:$PATH"
+export PATH="$HOME/.local/share/cargo/bin:$PATH"
 # xdg
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
@@ -57,9 +57,7 @@ export WINEPREFIX="$XDG_DATA_HOME"/wine
 # from manjaro init settings
 #!/bin/sh
 export XDG_CONFIG_HOME=$HOME/.config
-
-# make default editor Helix
-export EDITOR=helix
+export EDITOR=nvim
 
 # Most pure GTK3 apps use wayland by default, but some,
 # such as Firefox, require the backend to be explicitly selected.

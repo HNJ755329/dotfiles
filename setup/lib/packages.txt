@@ -10,18 +10,20 @@
 #--util applications--
 htop
 fzf
-tmux
+# tmux
 navi
 eza
-tree
+# tree -- eza -TL=2
 zoxide
 #--select xlicp or wl-clipboard with own responsibility
 # xclip
 # wl-clipboard
 #--editor and envirnoment--
 alacritty
-neovim
+# neovim / you must intall from GitHub
 emacs
+emacs-mozc
+emacs-mozc-bin
 docker
 git
 gh
