@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 set -ue
 
 helpmsg() {
@@ -17,9 +17,9 @@ link_to_homedir() {
 	local root=$1
 	local relPath=${2:-}
 	if [[ -n "$relPath" ]]; then
-		local absPath=$HOME/$root/$relPath
+		local absPath=$HOME$root/$relPath
 	else
-		local absPath=$HOME/$root
+		local absPath=$HOME$root
 	fi
 	if [[ "$HOME" != "$absPath" ]]; then
 		for f in $absPath/\.* $absPath/*; do
@@ -33,6 +33,8 @@ link_to_homedir() {
 			[[ $basef == "setup" ]] && continue
 			[[ $basef == "README.md" ]] && continue
 			[[ $basef == "LICENSE" ]] && continue
+			[[ $basef == "install" ]] && continue
+			[[ $basef == "install.sh" ]] && continue
 
 			if [[ -d "$f" ]]; then
 				if [[ -n "$relPath" ]]; then

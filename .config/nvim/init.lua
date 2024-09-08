@@ -61,8 +61,8 @@ map('n', 'r', '<Nop>');
 map('n', 'x', '"_x');
 map('n', 'sn', 'gt');
 map('n', 'sp', 'gT');
--- map('n','j','gj');
--- map('n','k','gk');
+map('n','j','gj');
+map('n','k','gk');
 map('n', '<Esc><Esc>', '<cmd>nohlsearch<cr><esc>', { silent = true });
 -- map('n','Y','y$');
 -- default for neovim10.0
@@ -78,24 +78,25 @@ map({ 'c', 'i' }, '<C-p>', '<Up>');
 map({ 'c', 'i' }, '<C-n>', '<Down>');
 map({ 'c', 'i' }, '<C-d>', '<Del>');
 --print("setting finished")
-local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
--- Auto-install lazy.nvim if not present
-if not vim.loop.fs_stat(lazypath) then
-  print('Installing lazy.nvim....')
-  vim.fn.system({
-    'git',
-    'clone',
-    '--filter=blob:none',
-    'https://github.com/folke/lazy.nvim.git',
-    '--branch=stable', -- latest stable release
-    lazypath,
-  })
+-- Bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out, "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
 end
-
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-  { 'VonHeikemen/lsp-zero.nvim',        branch = 'v3.x' },
+  { 'VonHeikemen/lsp-zero.nvim',        branch = 'v4.x' },
   { 'williamboman/mason.nvim' },
   { 'williamboman/mason-lspconfig.nvim' },
   { 'neovim/nvim-lspconfig' },
