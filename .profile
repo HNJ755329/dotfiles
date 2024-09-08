@@ -1,7 +1,8 @@
 # PATH settings
 #export PATH="/home/yasu/anaconda3/bin:$PATH"
 
-export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+[ -f $HOME/venv/base/bin/activate ] && source $HOME/venv/base/bin/activate
+# export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 export PATH="$HOME/dotfiles/bin:$PATH"
 export PATH="$HOME/.config/emacs/bin:$PATH"
 export PATH="$HOME/.local/share/cargo/bin:$PATH"

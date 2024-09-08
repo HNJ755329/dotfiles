@@ -131,7 +131,8 @@ source $ZSH/oh-my-zsh.sh
 [ -e ~/.sh_function ] && source ~/.sh_function
 [ -e ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-[ -x zoxide ] && [ -x zsh ] && eval "$(zoxide init --cmd cd zsh)"
+# [ -x zoxide ] && [ -x zsh ] && eval "$(zoxide init --cmd cd zsh)"
+eval "$(zoxide init --cmd cd zsh)"
 
 # export NVM_DIR="$HOME/.nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
