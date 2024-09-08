@@ -11,19 +11,19 @@ jobs:
       - name: Install required packages
         run: apt-get update && apt-get install -y git sudo
       - name: Install util packages
-        run: ./setup/packages_install.sh
+        run: ./install.sh
       - name: Install dotfiles
-        run: ./setup/install.sh
-  arch:
-    runs-on: ubuntu-latest
-    container: archlinux:latest
-    steps:
-      - name: Update packages
-        run: pacman -Syyu --noconfirm
-      - name: Install required packages
-        run: pacman -S --noconfirm git sudo
-      - uses: actions/checkout@master
-      - name: Install util packages
-        run: ./setup/packages_install.sh
-      - name: Install dotfiles
-        run: ./setup/install.sh
+        run: ./setup/setup.sh
+  # arch:
+  #   runs-on: ubuntu-latest
+  #   container: archlinux:latest
+  #   steps:
+  #     - name: Update packages
+  #       run: pacman -Syyu --noconfirm
+  #     - name: Install required packages
+  #       run: pacman -S --noconfirm git sudo
+  #     - uses: actions/checkout@master
+  #     - name: Install util packages
+  #       run: ./setup/packages_install.sh
+  #     - name: Install dotfiles
+  #       run: ./setup/install.sh
