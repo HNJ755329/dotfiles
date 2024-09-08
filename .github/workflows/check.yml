@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: Install required packages
-        run: apt-get update && apt-get install -y git sudo
+        run: apt-get update && apt-get install -y git sudo curl
       - name: Install util packages
         run: ./install.sh
       - name: Install dotfiles
