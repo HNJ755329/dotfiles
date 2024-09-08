@@ -16,49 +16,49 @@ backup=.dotbackup/$(date +"%Y%m%d-%H:%M:%S")
 link_to_homedir() {
 	local root=$1
 	local relPath=${2:-}
-	if [[ -n "$relPath" ]]; then
+	if [ -n "$relPath" ]; then
 		local absPath=$HOME/$root/$relPath
 	else
 		local absPath=$HOME/$root
 	fi
-	if [[ "$HOME" != "$absPath" ]]; then
+	if [ "$HOME" != "$absPath" ]; then
 		for f in $absPath/\.* $absPath/*; do
 			basef=$(basename $f)
-			[[ $basef == "." ]] && continue
-			[[ $basef == ".." ]] && continue
-			[[ $basef == ".git" ]] && continue
-			[[ $basef == ".github" ]] && continue
-			[[ $basef == ".gitignore" ]] && continue
-			[[ $basef == "bin" ]] && continue
-			[[ $basef == "setup" ]] && continue
-			[[ $basef == "README.md" ]] && continue
-			[[ $basef == "LICENSE" ]] && continue
+			[ $basef == "." ] && continue
+			[ $basef == ".." ] && continue
+			[ $basef == ".git" ] && continue
+			[ $basef == ".github" ] && continue
+			[ $basef == ".gitignore" ] && continue
+			[ $basef == "bin" ] && continue
+			[ $basef == "setup" ] && continue
+			[ $basef == "README.md" ] && continue
+			[ $basef == "LICENSE" ] && continue
 
-			if [[ -d "$f" ]]; then
-				if [[ -n "$relPath" ]]; then
+			if [ -d "$f" ]; then
+				if [ -n "$relPath" ]; then
 					link_to_homedir $root "$relPath/$basef"
 				else
 					link_to_homedir $root "$basef"
 				fi
-			elif [[ -e "$f" ]]; then
+			elif [ -e "$f" ]; then
 
 				#makebackup
-				if [[ -n "$relPath" ]]; then
+				if [ -n "$relPath" ]; then
 					local backupdir=$HOME/$backup/$relPath
 				else
 					local backupdir=$HOME/$backup
 				fi
 
-				if [[ -n "$relPath" ]]; then
+				if [ -n "$relPath" ]; then
 					local homedir=$HOME/$relPath
 				else
 					local homedir=$HOME
 				fi
 
-				[[ ! -d $homedir ]] && mkdir -p $homedir
+				[ ! -d $homedir ] && mkdir -p $homedir
 
-				if [[ -e $homedir/$basef ]]; then
-					[[ ! -d $backupdir ]] && mkdir -p $backupdir
+				if [ -e $homedir/$basef ]; then
+					[ ! -d $backupdir ] && mkdir -p $backupdir
 					echo "mv $homedir/$basef $backupdir"
 					mv $homedir/$basef $backupdir
 				fi
