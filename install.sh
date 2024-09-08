@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-sudo apt-update update && apt-get install -y \
+sudo apt-get update update && apt-get install -y \
 curl \
 git \
 gh \
