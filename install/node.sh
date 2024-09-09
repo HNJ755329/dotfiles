@@ -1,5 +1,6 @@
-#!/usr/bin/env sh
-
+#!/usr/bin/env bash
+export NVM_DIR="$HOME/.local/share/nvm"
+if ! type node > /dev/null 2>&1;then
 # installs nvm (Node Version Manager)
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
 
@@ -11,3 +12,4 @@ nvm install 20
 
 # verifies the right npm version is in the environment
 # npm -v # should print `10.8.2`
+fi

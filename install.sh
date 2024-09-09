@@ -10,7 +10,6 @@ ripgrep \
 htop \
 fzf \
 xclip \
-zoxide \
 picom \
 i3 \
 rofi \
