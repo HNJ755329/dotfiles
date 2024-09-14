@@ -29,6 +29,7 @@ sway \
 rofi \
 # i3 \
 # picom \
+# feh \
 # && apt-get clean \
 # && rm -rf /var/lib/apt/lists/*
 
