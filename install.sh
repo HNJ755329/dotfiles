@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
-sudo apt-get update && apt-get install -y \
+sudo apt-get update && sudo apt-get install -y \
 curl \
-git \
 gh \
 tig \
 zsh \
@@ -10,9 +9,6 @@ ripgrep \
 htop \
 fzf \
 xclip \
-picom \
-i3 \
-rofi \
 fcitx5-mozc \
 emacs \
 emacs-mozc \
@@ -23,7 +19,16 @@ openssh-client \
 openssh-server \
 gcc \
 gdb \
-universal-ctags
+universal-ctags \
+cargo \
+rustup \
+eza \
+alacritty \
+zoxide \
+sway \
+rofi \
+# i3 \
+# picom \
 # && apt-get clean \
 # && rm -rf /var/lib/apt/lists/*
 
