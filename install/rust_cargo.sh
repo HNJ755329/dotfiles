@@ -25,4 +25,5 @@ rustup default stable;
 # fi
 # depends cargo-atcoder
 sudo apt-get install -y libssl-dev;
-cargo install cargo-atcoder alacritty eza navi zoxide
+# cargo install cargo-atcoder alacritty eza navi zoxide
+cargo install cargo-atcoder navi 

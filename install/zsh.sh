@@ -6,9 +6,8 @@ if ! type zsh > /dev/null 2>&1; then
   chsh -s $(which zsh)
 fi
 
-
 #install oh my zsh
-if [ ! -e $ZSH/oh-my-zsh.sh ];then
+if [ ! -f $ZSH/oh-my-zsh.sh ];then
   ZSH= sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 #install powerlevel10k
