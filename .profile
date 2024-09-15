@@ -108,6 +108,7 @@ fi
 
 # Enable Fcitx5
 # See https://wiki.archlinux.org/title/Localization/Japanese
+# https://fcitx-im.org/wiki/Setup_Fcitx_5
 export DefaultImModule=fcitx
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx

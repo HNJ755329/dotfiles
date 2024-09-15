@@ -24,3 +24,5 @@ alias x='xdg-open'
 # X
 alias copy='xclip -sel clip'
 alias kl='kaggle c list --sort-by latestDeadline'
+alias tree='eza --long --tree --level=2'
+alias treee='eza --long --tree --level=3'
