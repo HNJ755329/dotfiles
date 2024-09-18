@@ -63,6 +63,7 @@ bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+q kill
+bindsym $mod+Escape exec systemctl suspend
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run

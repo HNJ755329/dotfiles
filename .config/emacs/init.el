@@ -5,6 +5,22 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
+(global-hl-line-mode t)
+;; (set-face-background 'hl-line "#00FF00")
+;; (set-face-foreground 'hl-line "#FF0000")
+;; Disable GUI
+(tool-bar-mode t)
+(menu-bar-mode t)
+(setq use-dialog-box t)
+(setq use-file-dialog t)
+(setq-default frame-title-format '("%b  -  GNU Emacs")) 
+;; Hide the startup screen
+(setq inhibit-startup-screen t)
+;; Increase font size
+(set-face-attribute 'default nil :height 130)
+(global-set-key (kbd "C-z") nil)
+(global-set-key (kbd "C-x C-z") nil)
+
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
 (setq make-backup-files nil)
@@ -12,7 +28,7 @@
 
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/emacs-mozc")
 (require 'mozc)
-(load-file "/usr/share/emacs/site-lisp/mozc.el")
+(load-file "/usr/share/emacs/site-lisp/emacs-mozc/mozc.el")
 (setq default-input-method "japanese-mozc")
 (prefer-coding-system 'utf-8) 
 
