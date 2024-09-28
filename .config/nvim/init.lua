@@ -159,8 +159,6 @@ require('mason-lspconfig').setup({
   }
 })
 
-let g:lsp_settings = { 'clangd': { 'cmd': ['clangd', '--enable-config'] } }
-
 local harpoon = require("harpoon")
 -- REQUIRED
 harpoon:setup()
