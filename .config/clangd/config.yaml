@@ -12,4 +12,5 @@ CompileFlags:
         - --target=x86_64-linux-gnu
         - --include-directory=/usr/include/c++/13
         - --include-directory=/usr/include/x86_64-linux-gnu/c++/13
+        - --include-directory=/usr/local/include
     Compiler: g++
