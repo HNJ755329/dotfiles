@@ -151,12 +151,15 @@ end)
 -- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
 require('mason').setup({})
 require('mason-lspconfig').setup({
+  -- ensure_installed = {'tsserver', 'rust_analyzer','clangd'},
   handlers = {
     function(server_name)
       require('lspconfig')[server_name].setup({})
     end,
   }
 })
+
+let g:lsp_settings = { 'clangd': { 'cmd': ['clangd', '--enable-config'] } }
 
 local harpoon = require("harpoon")
 -- REQUIRED
