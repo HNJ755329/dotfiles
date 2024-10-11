@@ -54,7 +54,7 @@ alias adb='HOME="$XDG_DATA_HOME"/android adb'
 export WINEPREFIX="$XDG_DATA_HOME"/wine
 
 #export NVM_DIR="$HOME/.local/share/nvm"
-#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # from manjaro init settings
 #!/bin/sh

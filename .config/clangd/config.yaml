@@ -3,14 +3,16 @@ If:
 
 CompileFlags:
     Add:
+        # - -std=c++17
         - -std=gnu++20
-        - -O2
-        - -Wall
+        # - -O2
+        # - -Wall
         - -Wextra
-        - -mtune=native
-        - -march=native
+        # - -mtune=native
+        # - -march=native
         - --target=x86_64-linux-gnu
         - --include-directory=/usr/include/c++/13
         - --include-directory=/usr/include/x86_64-linux-gnu/c++/13
         - --include-directory=/usr/local/include
+    # Compiler: clang++
     Compiler: g++

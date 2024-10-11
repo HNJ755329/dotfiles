@@ -25,16 +25,18 @@ rustup \
 eza \
 alacritty \
 zoxide \
-sway \
+# sway \ # japanese input hard! in sway
 rofi \
-# i3 \
-# picom \
-# feh \
+luarocks \
+clangd-18 \
+i3 \
+picom \
+feh \
 # && apt-get clean \
 # && rm -rf /var/lib/apt/lists/*
 
-./install/python_pip.sh
-./install/rust_cargo.sh
+# ./install/python_pip.sh
+# ./install/rust_cargo.sh
 ./install/docker.sh
 ./install/nvim.sh
 ./install/node.sh

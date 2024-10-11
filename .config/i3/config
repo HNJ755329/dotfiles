@@ -44,7 +44,8 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
 # exec --no-startup-id feh --bg-scale /home/yasu/wallpaper/s.jpg
-exec --no-startup-id feh --bg-tile $XDG_CONFIG_HOME/i3/bg.jpg
+exec --no-startup-id feh --bg-scale $XDG_CONFIG_HOME/i3/bg2.jpg
+# exec --no-startup-id feh --bg-tile $XDG_CONFIG_HOME/i3/bg.jpg
 exec --no-startup-id picom -b
 
 # use these keys for focus, movement, and resize directions when reaching for
@@ -64,6 +65,7 @@ bindsym $mod+Return exec alacritty
 # kill focused window
 bindsym $mod+q kill
 bindsym $mod+Escape exec systemctl suspend
+bindsym $mod+<D-`> exec systemctl suspend
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
