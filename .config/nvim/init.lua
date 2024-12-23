@@ -286,7 +286,7 @@ lsp_zero.on_attach(function(client, bufnr)
   local opts = { buffer = bufnr };
   -- local map = vim.keymap.set;
   map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
-  map('n', 'gd', '<cmd>tab split | lua vim.lsp.buf.definition({reuse_win = false})<cr>', opts)
+  map('n', 'gd', '<cmd>lua vim.lsp.buf.definition({reuse_win = false})<cr>', opts)
   map('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
   map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
   map('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
