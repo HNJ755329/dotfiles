@@ -1,10 +1,9 @@
-
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 (package-initialize)
-
+(global-display-line-numbers-mode t)
 (global-hl-line-mode t)
 ;; (set-face-background 'hl-line "#00FF00")
 ;; (set-face-foreground 'hl-line "#FF0000")
@@ -21,6 +20,9 @@
 (global-set-key (kbd "C-z") nil)
 (global-set-key (kbd "C-x C-z") nil)
 
+(global-set-key (kbd "C-t") nil)
+(global-set-key (kbd "M-t") nil)
+
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
 (setq make-backup-files nil)
@@ -35,13 +37,15 @@
 (require 'package)
 (add-to-list 'package-archives
              '("melpa-stable" . "https://stable.melpa.org/packages/"))
-;(package-initialize)
+;;(package-initialize)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(grip-mode markdown-preview-mode markdown-mode)))
+ '(package-selected-packages
+   '(flycheck a68-mode grip-mode markdown-preview-mode markdown-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -60,3 +64,60 @@
 ;; '(livedown-port 1337)     ; port for livedown server
 ;; '(livedown-browser nil))  ; browser to use
 ;;(require 'livedown)
+
+;; LSP関連パッケージ
+;; company-box
+(dolist (pkg '(lsp-mode yasnippet lsp-ui company))
+  (unless (package-installed-p pkg)
+    (package-install pkg)))
+
+;; LaTeX LSPサーバー
+(unless (package-installed-p 'lsp-latex)
+  (package-install 'lsp-latex))
+
+;; LSPモード
+(require 'lsp-mode)
+(require 'lsp-latex)
+(require 'company)
+
+;; LSP自動起動
+(add-hook 'latex-mode-hook #'lsp)
+(add-hook 'LaTeX-mode-hook #'lsp)
+
+;; 補完機能
+(add-hook 'latex-mode-hook #'company-mode)
+(add-hook 'LaTeX-mode-hook #'company-mode)
+
+;; TeXLab (LaTeX LSPサーバー) の設定
+(setq lsp-latex-server 'texlab)
+(setq lsp-latex-texlab-executable "texlab")
+
+;; または Digestif (別のLSPサーバー)
+;; (setq lsp-latex-server 'digestif)
+;; (setq lsp-latex-digestif-executable "digestif")
+
+;; Company (補完フロントエンド)
+(setq company-idle-delay 0.2)
+(setq company-minimum-prefix-length 2)
+(setq company-tooltip-limit 10)
+(setq company-show-numbers t) ; 番号表示で選択しやすく
+
+;; LSP UI改善
+(setq lsp-ui-doc-enable t)        ; ドキュメント表示
+(setq lsp-ui-doc-position 'top)   ; ドキュメント位置
+(setq lsp-ui-sideline-enable t)   ; サイドライン情報
+(setq lsp-ui-peek-enable t)       ; 定義ジャンプ
+
+(unless (package-installed-p 'flycheck)
+  (package-install 'flycheck))
+;; シンタックスチェック
+(setq lsp-diagnostics-provider :flycheck) ; または :flymake
+;; シンボルハイライト
+(setq lsp-enable-symbol-highlighting t)
+;; 入力中も解析
+(setq lsp-enable-on-type-formatting t)
+
+(require 'yasnippet)
+(yas-global-mode 1)
+(yas-reload-all)
+(add-hook 'prog-mode-hook #'yas-minor-mode)

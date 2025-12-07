@@ -1,7 +1,7 @@
 # PATH settings
 #export PATH="/home/yasu/anaconda3/bin:$PATH"
 
-[ -f $HOME/venv/base/bin/activate ] && source $HOME/venv/base/bin/activate
+[ -f $HOME/venv/base313/bin/activate ] && source $HOME/venv/base313/bin/activate
 # export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 export PATH="$HOME/dotfiles/bin:$PATH"
 export PATH="$HOME/.config/emacs/bin:$PATH"
@@ -113,3 +113,5 @@ export DefaultImModule=fcitx
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
+
+export PATH="$HOME/.elan/bin:$PATH"

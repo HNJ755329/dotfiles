@@ -53,12 +53,17 @@ opt.smartindent = true;
 opt.wrap = true;
 opt.pumheight = 10;
 --print("mapping set")
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+vim.g.mapleader = 's'
+vim.g.maplocalleader = 's'
 local map = vim.keymap.set
+-- map('n', '<space>bd', ':Bdelete<cr>');
+map('n', '<C-h>', ':bprev<cr>');
+map('n', '<C-l>', ':bnext<cr>');
 map('c', 'qq', 'q!');
 map('n', 's', '<Nop>');
+map('n', 'S', '<Nop>');
 map('n', 'r', '<Nop>');
+map('n', 'Q', '<Nop>');
 map('n', 'x', '"_x');
 map('n', 'sn', 'gt');
 map('n', 'sp', 'gT');
@@ -163,6 +168,13 @@ require('lazy').setup({
   dependencies = {
     'nvim-treesitter/nvim-treesitter', -- optional
     'nvim-tree/nvim-web-devicons',     -- optional
+  }
+  ,
+  {
+    'nvim-telescope/telescope.nvim',
+    tag = '0.1.8',
+    -- or                              , branch = '0.1.x',
+    dependencies = { 'nvim-lua/plenary.nvim' }
   }
 }
 })
@@ -271,6 +283,15 @@ lspconfig.clangd.setup({
   },
 })
 
+lspconfig.ts_ls.setup({
+  filetypes = { "javascript", "typescript" }, -- HTML を追加
+  init_options = {
+    preferences = {
+      includeCompletionsForModuleExports = true,
+    },
+  },
+})
+
 -- if you are using neovim v0.9 or lower
 -- this colorscheme is better than the default
 vim.cmd.colorscheme('habamax')
@@ -296,9 +317,10 @@ lsp_zero.on_attach(function(client, bufnr)
   -- map('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
   map('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
   map('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>', opts)
-  map('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>', opts)
-  map('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>', opts);
-  map('n', '<leader>f', '<cmd>lua vim.lsp.buf.format({async = true})<cr>');
+  map('n', 'ge', '<cmd>lua vim.diagnostic.setloclist()<cr>', opts)
+  map('n', 'Q', '<cmd>lua vim.diagnostic.goto_prev()<cr>', opts)
+  map('n', 'S', '<cmd>lua vim.diagnostic.goto_next()<cr>', opts);
+  map('n', '<leader>fm', '<cmd>lua vim.lsp.buf.format({async = true})<cr>');
   -- map({'n', 'x'}, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
 end)
 
@@ -314,12 +336,12 @@ require('mason-lspconfig').setup({
   }
 })
 
-local harpoon = require("harpoon")
--- REQUIRED
-harpoon:setup()
--- REQUIRED
-map("n", "<leader>a", function() harpoon:list():add() end)
-map("n", "<leader>e", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+-- local harpoon = require("harpoon")
+-- -- REQUIRED
+-- harpoon:setup()
+-- -- REQUIRED
+-- map("n", "<leader>a", function() harpoon:list():add() end)
+-- map("n", "<leader>e", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
 -- vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
 -- vim.keymap.set("n", "<C-t>", function() harpoon:list():select(2) end)
 -- vim.keymap.set("n", "<C-n>", function() harpoon:list():select(3) end)
@@ -488,7 +510,7 @@ require('neoscroll').setup({
     '<C-y>', '<C-e>',
     'zt', 'zz', 'zb',
   },
-  hide_cursor = true,         -- Hide cursor while scrolling
+  hide_cursor = true,          -- Hide cursor while scrolling
   stop_eof = true,             -- Stop at <EOF> when scrolling downwards
   respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
   cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
@@ -500,3 +522,52 @@ require('neoscroll').setup({
     'WinScrolled', 'CursorMoved'
   },
 })
+
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
+vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+
+local function ShowMaps()
+  local old_reg = vim.fn.getreg("a")
+  local old_reg_type = vim.fn.getregtype("a")
+
+  local ok, err = pcall(function()
+    vim.cmd('redir @a')
+    vim.cmd('silent map | call feedkeys("\\<CR>")')
+    vim.cmd('redir END')
+
+    local maps_content = vim.fn.getreg("a")
+    local maps_lines = {}
+
+    for line in maps_content:gmatch("[^\r\n]+") do
+      if line:len() > 0 and not line:match("^%s*$") then
+        table.insert(maps_lines, line)
+      end
+    end
+
+    -- Use Telescope to display the maps
+    require('telescope.pickers').new({}, {
+      prompt_title = '🔍 Key Maps',
+      finder = require('telescope.finders').new_table({
+        results = maps_lines,
+      }),
+      sorter = require('telescope.config').values.generic_sorter({}),
+      previewer = require('telescope.config').values.grep_previewer({}),
+      layout_config = {
+        width = 0.9,
+        height = 0.8,
+      },
+    }):find()
+  end)
+
+  vim.fn.setreg("a", old_reg, old_reg_type)
+
+  if not ok then
+    error(err)
+  end
+end
+
+vim.api.nvim_create_user_command('ShowMaps', ShowMaps, {})
+vim.keymap.set('n', '<leader>map', ':ShowMaps<CR>')
