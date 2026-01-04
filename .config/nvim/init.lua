@@ -121,7 +121,6 @@ require('lazy').setup({
   { 'nvim-treesitter/nvim-treesitter' },
   { "ThePrimeagen/harpoon",             branch = "harpoon2", dependencies = { "nvim-lua/plenary.nvim" } },
 
-  { 'majutsushi/tagbar' },
   { 'lewis6991/gitsigns.nvim' },
   { 'karb94/neoscroll.nvim' },
   {
@@ -175,7 +174,17 @@ require('lazy').setup({
     tag = '0.1.8',
     -- or                              , branch = '0.1.x',
     dependencies = { 'nvim-lua/plenary.nvim' }
-  }
+  },
+  {
+    'stevearc/aerial.nvim',
+    opts = {},
+    -- Optional dependencies
+    dependencies = {
+       "nvim-treesitter/nvim-treesitter",
+       "nvim-tree/nvim-web-devicons"
+    },
+  },
+
 }
 })
 
@@ -349,7 +358,6 @@ require('mason-lspconfig').setup({
 -- Toggle previous & next buffers stored within Harpoon list
 -- vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
 -- vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
-map('n', '<leader>l', '<cmd>TagbarToggle<cr>');
 
 require 'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the listed parsers MUST always be installed)
@@ -503,25 +511,25 @@ require('gitsigns').setup {
   end
 }
 
-require('neoscroll').setup({
-  mappings = { -- Keys to be mapped to their corresponding default scrolling animation
-    '<C-u>', '<C-d>',
-    '<C-b>', '<C-f>',
-    '<C-y>', '<C-e>',
-    'zt', 'zz', 'zb',
-  },
-  hide_cursor = true,          -- Hide cursor while scrolling
-  stop_eof = true,             -- Stop at <EOF> when scrolling downwards
-  respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
-  cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
-  easing = 'linear',           -- Default easing function
-  pre_hook = nil,              -- Function to run before the scrolling animation starts
-  post_hook = nil,             -- Function to run after the scrolling animation ends
-  performance_mode = false,    -- Disable "Performance Mode" on all buffers.
-  ignored_events = {           -- Events ignored while scrolling
-    'WinScrolled', 'CursorMoved'
-  },
-})
+-- require('neoscroll').setup({
+--   mappings = { -- Keys to be mapped to their corresponding default scrolling animation
+--     '<C-u>', '<C-d>',
+--     '<C-b>', '<C-f>',
+--     '<C-y>', '<C-e>',
+--     'zt', 'zz', 'zb',
+--   },
+--   hide_cursor = true,          -- Hide cursor while scrolling
+--   stop_eof = true,             -- Stop at <EOF> when scrolling downwards
+--   respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
+--   cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
+--   easing = 'linear',           -- Default easing function
+--   pre_hook = nil,              -- Function to run before the scrolling animation starts
+--   post_hook = nil,             -- Function to run after the scrolling animation ends
+--   performance_mode = false,    -- Disable "Performance Mode" on all buffers.
+--   ignored_events = {           -- Events ignored while scrolling
+--     'WinScrolled', 'CursorMoved'
+--   },
+-- })
 
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
@@ -529,45 +537,13 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live gr
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
 
-local function ShowMaps()
-  local old_reg = vim.fn.getreg("a")
-  local old_reg_type = vim.fn.getregtype("a")
-
-  local ok, err = pcall(function()
-    vim.cmd('redir @a')
-    vim.cmd('silent map | call feedkeys("\\<CR>")')
-    vim.cmd('redir END')
-
-    local maps_content = vim.fn.getreg("a")
-    local maps_lines = {}
-
-    for line in maps_content:gmatch("[^\r\n]+") do
-      if line:len() > 0 and not line:match("^%s*$") then
-        table.insert(maps_lines, line)
-      end
-    end
-
-    -- Use Telescope to display the maps
-    require('telescope.pickers').new({}, {
-      prompt_title = '🔍 Key Maps',
-      finder = require('telescope.finders').new_table({
-        results = maps_lines,
-      }),
-      sorter = require('telescope.config').values.generic_sorter({}),
-      previewer = require('telescope.config').values.grep_previewer({}),
-      layout_config = {
-        width = 0.9,
-        height = 0.8,
-      },
-    }):find()
-  end)
-
-  vim.fn.setreg("a", old_reg, old_reg_type)
-
-  if not ok then
-    error(err)
-  end
-end
-
-vim.api.nvim_create_user_command('ShowMaps', ShowMaps, {})
-vim.keymap.set('n', '<leader>map', ':ShowMaps<CR>')
+require("aerial").setup({
+  -- optionally use on_attach to set keymaps when aerial has attached to a buffer
+  on_attach = function(bufnr)
+    -- Jump forwards/backwards with '{' and '}'
+    vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
+    vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
+  end,
+})
+-- You probably also want to set a keymap to toggle aerial
+vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
