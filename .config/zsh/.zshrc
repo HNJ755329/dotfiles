@@ -5,6 +5,8 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# export BAT_THEME="GitHub"
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
@@ -15,7 +17,10 @@ export ZSH="$HOME/.local/share/oh-my-zsh"
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
+# ZSH_THEME="powerlevel10k/powerlevel10k"
+# ZSH_THEME="agnoster"
+# ZSH_THEME="robbyrussell"
+ZSH_THEME="amuse"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -134,25 +139,27 @@ source $ZSH/oh-my-zsh.sh
 # [ -x zoxide ] && [ -x zsh ] && eval "$(zoxide init --cmd cd zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-#function load-nvm () {
-  #if [[ $OSTYPE == "darwin"* ]]; then
-    #export NVM_DIR=$XDG_DATA_HOME/nvm
-    #[[ -s $(brew --prefix nvm)/nvm.sh ]] && source $(brew --prefix nvm)/nvm.sh
-  #else
-    #[[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
-  #fi
-#}
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+function load-nvm () {
+  if [[ $OSTYPE == "darwin"* ]]; then
+    export NVM_DIR=$XDG_DATA_HOME/nvm
+    [[ -s $(brew --prefix nvm)/nvm.sh ]] && source $(brew --prefix nvm)/nvm.sh
+  else
+    [[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
+  fi
+}
 
-#load-nvmrc() {
-  #if [[ -f .nvmrc && -r .nvmrc ]]; then
-    #if ! type nvm >/dev/null; then
-      #load-nvm
-    #fi
-    #nvm use
-  #fi
-#}
+load-nvmrc() {
+  if [[ -f .nvmrc && -r .nvmrc ]]; then
+    if ! type nvm >/dev/null; then
+      load-nvm
+    fi
+    nvm use
+  fi
+}
 # add-zsh-hook chpwd load-nvmrc
 eval "$(/home/yasu/.local/bin/mise activate zsh)"
+
+source "$HOME/.local/share/../bin/env"

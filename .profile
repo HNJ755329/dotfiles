@@ -115,3 +115,7 @@ export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
 
 export PATH="$HOME/.elan/bin:$PATH"
+# golang
+export PATH="$HOME/go/bin:$PATH"
+
+export PATH="$PATH:$HOME/.local/share/../bin/env"

@@ -20,9 +20,8 @@
 
 [merge]
     conflictstyle = diff3
-
 [diff]
-    colorMoved = default;
+  colorMoved = default;
 	tool = vimdiff
 [difftool]
 	prompt = false
@@ -37,3 +36,8 @@
 [credential "https://gist.github.com"]
 	helper = 
 	helper = !/usr/bin/gh auth git-credential
+[init]
+	defaultBranch = main
+[ghq]
+	user = HNJ755329
+  root = ~/ghq

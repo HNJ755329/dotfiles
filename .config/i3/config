@@ -50,9 +50,7 @@ bindsym XF86AudioMicMute exec --no-startup-id set Capture toggle
 # Screen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
-# exec --no-startup-id feh --bg-scale /home/yasu/wallpaper/s.jpg
 exec --no-startup-id feh --bg-scale --randomize $HOME/.wallpaper
-# exec --no-startup-id feh --bg-tile $XDG_CONFIG_HOME/i3/bg.jpg
 exec --no-startup-id picom -b
 
 # use these keys for focus, movement, and resize directions when reaching for

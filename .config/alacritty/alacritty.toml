@@ -6,6 +6,11 @@
 # family = "MesloLGS NF"
 # for powerline10k
 
+[general]
+import = [
+    "~/.config/alacritty/themes/themes/github_light.toml"
+]
+
 [env]
 #TERM = "alacritty"
 
@@ -19,7 +24,7 @@ program = "/usr/bin/zsh"
 
 #it may works on xfwm4
 [window]
-opacity = 0.8
+# opacity = 0.8
 #decorations = "Full"
 #startup_mode = "Maximized"
 #dimensions = {columns = 50, lines = 50}

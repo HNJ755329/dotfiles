@@ -1,25 +1,22 @@
---print("this is vim.opt");
 local opt = vim.opt;
 
 opt.timeoutlen = 300;
 opt.clipboard = "unnamedplus";
-opt.number = true;
-opt.relativenumber = true;
+opt.number = false;
+opt.relativenumber = false;
 opt.signcolumn = "yes";
 opt.cursorline = true;
 opt.syntax = "on";
 --Set 7 lines to the cursor - when moving vertically using j/k
-opt.so = 7;
-opt.smarttab = true;
+opt.scrolloff = 7;
+opt.smarttab = false;
 opt.listchars = { space = '_', tab = '>~' };
 --行末の1文字先までカーソルを移動できるように
 opt.virtualedit = "onemore";
 --括弧入力時の対応する括弧を表示
-opt.showmatch = true;
+opt.showmatch = false;
 --ステータスラインを常に表示
-opt.laststatus = 2;
---コマンドラインの補完
-opt.wildmode = "list:longest";
+opt.wildmode = "longest:list,full";
 --検索系
 --検索文字列が小文字の場合は大文字小文字を区別なく検索する
 opt.ignorecase = true;
@@ -59,19 +56,15 @@ local map = vim.keymap.set
 -- map('n', '<space>bd', ':Bdelete<cr>');
 map('n', '<C-h>', ':bprev<cr>');
 map('n', '<C-l>', ':bnext<cr>');
-map('c', 'qq', 'q!');
+-- map('c', 'qq', 'q!');
 map('n', 's', '<Nop>');
-map('n', 'S', '<Nop>');
-map('n', 'r', '<Nop>');
-map('n', 'Q', '<Nop>');
+-- map('n', 'S', '<Nop>');
+-- map('n', 'r', '<Nop>');
+-- map('n', 'Q', '<Nop>');
 map('n', 'x', '"_x');
-map('n', 'sn', 'gt');
-map('n', 'sp', 'gT');
 map('n', 'j', 'gj');
 map('n', 'k', 'gk');
 map('n', '<Esc><Esc>', '<cmd>nohlsearch<cr><esc>', { silent = true });
--- map('n','Y','y$');
--- default for neovim10.0
 map('n', 'U', '<C-r>');
 map('i', 'jk', '<Esc>');
 --Emacs like keybinds
@@ -102,7 +95,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-  { 'VonHeikemen/lsp-zero.nvim',        branch = 'v4.x' },
+  { 'VonHeikemen/lsp-zero.nvim', branch = 'v4.x' },
   { 'williamboman/mason.nvim' },
   { 'williamboman/mason-lspconfig.nvim' },
   { 'neovim/nvim-lspconfig' },
@@ -119,10 +112,10 @@ require('lazy').setup({
   { 'saadparwaiz1/cmp_luasnip' },
   -- ui
   { 'nvim-treesitter/nvim-treesitter' },
-  { "ThePrimeagen/harpoon",             branch = "harpoon2", dependencies = { "nvim-lua/plenary.nvim" } },
+  -- { "ThePrimeagen/harpoon",             branch = "harpoon2", dependencies = { "nvim-lua/plenary.nvim" } },
 
   { 'lewis6991/gitsigns.nvim' },
-  { 'karb94/neoscroll.nvim' },
+  -- { 'karb94/neoscroll.nvim' },
   {
     "folke/trouble.nvim",
     opts = {}, -- for default options, refer to the configuration section for custom setup.
@@ -167,12 +160,11 @@ require('lazy').setup({
   dependencies = {
     'nvim-treesitter/nvim-treesitter', -- optional
     'nvim-tree/nvim-web-devicons',     -- optional
-  }
+  },}
   ,
   {
     'nvim-telescope/telescope.nvim',
     tag = '0.1.8',
-    -- or                              , branch = '0.1.x',
     dependencies = { 'nvim-lua/plenary.nvim' }
   },
   {
@@ -180,12 +172,22 @@ require('lazy').setup({
     opts = {},
     -- Optional dependencies
     dependencies = {
-       "nvim-treesitter/nvim-treesitter",
-       "nvim-tree/nvim-web-devicons"
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons"
     },
   },
-
-}
+  { 'projekt0n/github-nvim-theme', name = 'github-theme' },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    opts = {
+      indent = { char = "│", tab_char = "│", },
+      scope = { enabled = true, show_start = true, show_end = true, },
+      exclude = { filetypes = { "help", "terminal", "lazy", "mason", }, },
+    }
+  },
+  { "chrisbra/csv.vim" },
+  { 'stevearc/conform.nvim', opts = {}, },
 })
 
 -- https://lsp-zero.netlify.app/v3.x/autocomplete.html#use-enter-to-confirm-completion
@@ -268,18 +270,31 @@ cmp.setup.cmdline({ '/', '?' }, {
 })
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline(':', {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = cmp.config.sources({
-    { name = 'path' }
-  }, {
-    { name = 'cmdline' }
-  }),
-  matching = { disallow_symbol_nonprefix_matching = false }
-})
+-- cmp.setup.cmdline(':', {
+--   mapping = cmp.mapping.preset.cmdline(),
+--   sources = cmp.config.sources({
+--     { name = 'path' }
+--   }, {
+--     { name = 'cmdline' }
+--   }),
+--   matching = { disallow_symbol_nonprefix_matching = false }
+-- })
 
 -- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+-- to learn how to use jason.nvim
+-- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
+require('mason').setup({})
+-- require('mason-lspconfig').setup({
+--   -- ensure_installed = {'tsserver', 'rust_analyzer','clangd'},
+--   handlers = {
+--     function(server_name)
+--       require('lspconfig')[server_name].setup({})
+--     end,
+--   }
+-- })
+-- 意図しないlspの起動があるので消す
 
 local lspconfig = require('lspconfig')
 lspconfig.clangd.setup({
@@ -301,9 +316,38 @@ lspconfig.ts_ls.setup({
   },
 })
 
+lspconfig.pyright.setup({
+  settings = {
+    python = {
+      analysis = {
+        typeCheckingMode = "basic", -- "off", "basic", "strict" から選択
+        autoSearchPaths = true,
+        useLibraryCodeForTypes = true
+      }
+    }
+  }
+})
+
+lspconfig.rust_analyzer.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+  cmd = { 'rust-analyzer' },
+  filetypes = { 'rust' },
+  root_markers = {"Cargo.toml", ".git"},
+  single_file_support = true,
+  settings = {
+    ['rust-analyzer'] = {
+      diagnostics = {
+        enable = false;
+      }
+    }
+  },
+})
+
 -- if you are using neovim v0.9 or lower
 -- this colorscheme is better than the default
-vim.cmd.colorscheme('habamax')
+vim.cmd.colorscheme('github_dark_default')
+-- vim.cmd.colorscheme('habamax')
 -- vim.cmd.colorscheme('retrobox')
 
 local lsp_zero = require('lsp-zero')
@@ -333,36 +377,10 @@ lsp_zero.on_attach(function(client, bufnr)
   -- map({'n', 'x'}, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
 end)
 
--- to learn how to use jason.nvim
--- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
-require('mason').setup({})
-require('mason-lspconfig').setup({
-  -- ensure_installed = {'tsserver', 'rust_analyzer','clangd'},
-  handlers = {
-    function(server_name)
-      require('lspconfig')[server_name].setup({})
-    end,
-  }
-})
 
--- local harpoon = require("harpoon")
--- -- REQUIRED
--- harpoon:setup()
--- -- REQUIRED
--- map("n", "<leader>a", function() harpoon:list():add() end)
--- map("n", "<leader>e", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
--- vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
--- vim.keymap.set("n", "<C-t>", function() harpoon:list():select(2) end)
--- vim.keymap.set("n", "<C-n>", function() harpoon:list():select(3) end)
--- vim.keymap.set("n", "<C-s>", function() harpoon:list():select(4) end)
--- Toggle previous & next buffers stored within Harpoon list
--- vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
--- vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
-
-require 'nvim-treesitter.configs'.setup {
+require('nvim-treesitter.configs').setup {
   -- A list of parser names, or "all" (the listed parsers MUST always be installed)
   ensure_installed = { "c",
-    "lua",
     "vim",
     "vimdoc",
     "query",
@@ -462,9 +480,6 @@ require('gitsigns').setup {
     row = 0,
     col = 1
   },
-}
-
-require('gitsigns').setup {
   on_attach = function(bufnr)
     local gitsigns = require('gitsigns')
 
@@ -511,39 +526,74 @@ require('gitsigns').setup {
   end
 }
 
--- require('neoscroll').setup({
---   mappings = { -- Keys to be mapped to their corresponding default scrolling animation
---     '<C-u>', '<C-d>',
---     '<C-b>', '<C-f>',
---     '<C-y>', '<C-e>',
---     'zt', 'zz', 'zb',
---   },
---   hide_cursor = true,          -- Hide cursor while scrolling
---   stop_eof = true,             -- Stop at <EOF> when scrolling downwards
---   respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
---   cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
---   easing = 'linear',           -- Default easing function
---   pre_hook = nil,              -- Function to run before the scrolling animation starts
---   post_hook = nil,             -- Function to run after the scrolling animation ends
---   performance_mode = false,    -- Disable "Performance Mode" on all buffers.
---   ignored_events = {           -- Events ignored while scrolling
---     'WinScrolled', 'CursorMoved'
---   },
--- })
-
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
-vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+map('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
+map('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
+map('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
+map('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
 
 require("aerial").setup({
   -- optionally use on_attach to set keymaps when aerial has attached to a buffer
   on_attach = function(bufnr)
     -- Jump forwards/backwards with '{' and '}'
-    vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
-    vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
+    map("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
+    map("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
   end,
 })
 -- You probably also want to set a keymap to toggle aerial
-vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
+map("n", "<leader>a", "<cmd>AerialToggle!<CR>")
+-- csv.vimの設定
+vim.g.csv_delim_test = ',;|'     -- 区切り文字の自動判別
+vim.g.csv_highlight_column = 'y' -- 現在のカラムをハイライト
+
+-- ファイルタイプ別の設定
+vim.api.nvim_create_augroup('csv_files', { clear = true })
+-- vim.api.nvim_create_autocmd({ 'BufRead', 'BufWritePost' }, {
+--   group = 'csv_files',
+--   pattern = '*.csv',
+--   callback = function()
+--     -- ファイル読み込み時に整列（遅い場合はコメントアウト）
+--     vim.cmd('%ArrangeColumn')
+--   end,
+-- })
+
+-- vim.api.nvim_create_autocmd('BufWritePre', {
+--   group = 'csv_files',
+--   pattern = '*.csv',
+--   callback = function()
+--     -- 保存前に整列解除
+--     vim.cmd('%unArrangeColumn')
+--   end,
+-- })
+-- CSVファイル用のキーマッピング（任意）
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'csv',
+  callback = function()
+    -- 列の整列/解除
+    vim.keymap.set('n', '<leader>ca', '%ArrangeColumn', { buffer = true, desc = 'CSV: Arrange columns' })
+    vim.keymap.set('n', '<leader>cu', '%unArrangeColumn', { buffer = true, desc = 'CSV: Unarrange columns' })
+
+    -- 列の削除（カーソル列を削除）
+    vim.keymap.set('n', '<leader>cd', ':DeleteColumn<CR>', { buffer = true, desc = 'CSV: Delete column' })
+
+    -- ヘッダー表示切り替え
+    vim.keymap.set('n', '<leader>ch', ':HeaderToggle<CR>', { buffer = true, desc = 'CSV: Toggle header' })
+  end,
+})
+
+require("conform").setup({
+  formatters_by_ft = {
+    lua = { "stylua" },
+    -- Conform will run multiple formatters sequentially
+    python = { "isort", "black" },
+    -- You can customize some of the format options for the filetype (:help conform.format)
+    rust = { "rustfmt", lsp_format = "fallback" },
+    -- Conform will run the first available formatter
+    javascript = { "prettierd", "prettier", stop_after_first = true },
+    markdown = { "prettier" },
+  },
+  format_on_save = {
+      timeout_ms = 500,
+      lsp_fallback = true,
+    },
+})
