@@ -26,10 +26,10 @@
       - gdb 
       - clangd-18 
       - universal-ctags 
-      - cargo 
-      - rustup 
       - eza 
       - zoxide 
+      # - cargo 
+      # - rustup 
 
     apt_desktop_packages:
       - alacritty 
@@ -41,11 +41,13 @@
 
     # Cargoでビルドしたいもの
     cargo_packages:
-      # - fd-find
+      - bat
       # - bottom
 
     # Goでビルドしたいもの
     go_packages:
+      - github.com/x-motemen/ghq@latest
+      - github.com/d-kuro/gwq/cmd/gwq@latest
       # - github.com/jesseduffield/lazygit@latest
 
   tasks:
@@ -55,6 +57,12 @@
         name: "{{ apt_packages }}"
         state: present
         update_cache: yes
+
+    - name: Install rustup
+      shell: |
+        curl https://sh.rustup.rs -sSf | sh -s -- -y
+      args:
+        creates: "{{ ansible_env.HOME }}/.cargo/bin/rustup"
 
     - name: Install Cargo packages
       community.general.cargo:
