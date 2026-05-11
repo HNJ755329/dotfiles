@@ -10,7 +10,7 @@
 
 [general]
 import = [
-    "~/.config/alacritty/themes/themes/github_dark.toml"
+    # "~/.config/alacritty/themes/themes/github_dark.toml"
 ]
 
 [env]
@@ -20,7 +20,7 @@ TERM = "alacritty"
 history = 10000
 multiplier = 3
 
-[shell]
+[terminal.shell]
 # args = ["-l", "-c", "tmux a -t 0 || tmux -u"]
 program = "/usr/bin/zsh"
 

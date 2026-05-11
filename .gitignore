@@ -1,0 +1,14 @@
+# emacs
+eln-cache/
+straight/build/
+straight/repos/
+var/
+.cache/
+auto-save-list/
+
+# zsh
+.zcompdump*
+.zcompcache/
+.zzcompdump*
+.zsh_history
+.zsh_sessions/

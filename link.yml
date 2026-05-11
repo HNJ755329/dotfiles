@@ -1,0 +1,49 @@
+
+- name: create links
+  hosts: localhost
+  # gather_facts: yes  # これが true (デフォルト) なら ansible_env が使えます
+  vars:
+    git: github.com
+    user: HNJ755329
+    repository: dotfiles
+    config_dirs:
+      - alacritty
+      - clangd
+      - emacs
+      - gh
+      - git
+      - gwq
+      - i3
+      - nvim
+      - tmux
+      - zsh
+      - cargo-atcoder.toml
+
+  tasks:
+    - name: Check existing configs
+      stat:
+        path: "{{ ansible_env.HOME }}/.config/{{ item }}"
+      loop: "{{ config_dirs }}"
+      register: config_stats
+
+    - name: Backup existing configs
+      command:
+        mv
+        "{{ ansible_env.HOME }}/.config/{{ item.item }}"
+        "{{ ansible_env.HOME }}/.config/{{ item.item }}.backup"
+      when:
+        - item.stat.exists
+        - not item.stat.islnk
+      loop: "{{ config_stats.results }}"
+
+    - name: setpath
+      ansible.builtin.set_fact:
+        path_: "{{ ansible_env.HOME }}/ghq/{{ git }}/{{ user }}/{{ repository }}/.config"
+
+    - name: Link configs
+      file:
+        src: "{{ path_ }}/{{ item }}"
+        dest: "{{ ansible_env.HOME }}/.config/{{ item }}"
+        state: link
+        force: yes
+      loop: "{{ config_dirs }}"
