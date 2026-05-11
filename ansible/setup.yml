@@ -1,0 +1,71 @@
+- name: Setup Development Environment
+  hosts: localhost
+  connection: local
+  become: false # 基本は一般ユーザーで実行
+
+  vars:
+    # aptで入れたいもの (PPA含む)
+    apt_packages:
+      - git
+      - gh 
+      - tig
+      - tmux
+      - ripgrep
+      - curl 
+      - zsh 
+      - htop 
+      - fzf 
+      - fcitx5-mozc 
+      - emacs 
+      - emacs-mozc 
+      - emacs-mozc-bin 
+      - python3 
+      - openssh-client 
+      - openssh-server 
+      - gcc 
+      - gdb 
+      - clangd-18 
+      - universal-ctags 
+      - cargo 
+      - rustup 
+      - eza 
+      - zoxide 
+
+    apt_desktop_packages:
+      - alacritty 
+      - rofi 
+      - i3 
+      - feh 
+      - xclip 
+      - i3wm
+
+    # Cargoでビルドしたいもの
+    cargo_packages:
+      # - fd-find
+      # - bottom
+
+    # Goでビルドしたいもの
+    go_packages:
+      # - github.com/jesseduffield/lazygit@latest
+
+  tasks:
+    - name: Install APT packages
+      become: true # ここだけsudoが必要
+      apt:
+        name: "{{ apt_packages }}"
+        state: present
+        update_cache: yes
+
+    - name: Install Cargo packages
+      community.general.cargo:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ cargo_packages }}"
+      # インストール先を明示的に指定する場合
+      # path: ~/.local
+
+    - name: Install Go packages
+      shell: "go install {{ item }}"
+      loop: "{{ go_packages }}"
+      args:
+        creates: "{{ ansible_env.HOME }}/go/bin/{{ item | basename | split('@') | first }}"

@@ -316,6 +316,7 @@ lspconfig.ts_ls.setup({
   },
 })
 
+lspconfig.ruff.setup({})
 lspconfig.pyright.setup({
   settings = {
     python = {

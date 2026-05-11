@@ -1,9 +1,9 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
 
 # export BAT_THEME="GitHub"
 
@@ -73,7 +73,8 @@ ZSH_THEME="amuse"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
-HISTORY_IGNORE="(ll|ls|cd|pwd|exit|cd *)"
+setopt HIST_IGNORE_SPACE
+HISTORY_IGNORE="(ll|ls|cd|pwd|exit|cd *|history|htop)"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
@@ -120,7 +121,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
-[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
+# [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 
 # ---------- user custom below ----------
 # user-defined overrides
@@ -137,7 +138,7 @@ source $ZSH/oh-my-zsh.sh
 [ -e ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # [ -x zoxide ] && [ -x zsh ] && eval "$(zoxide init --cmd cd zsh)"
-eval "$(zoxide init --cmd cd zsh)"
+eval "$( zoxide init --cmd cd zsh)"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -161,5 +162,4 @@ load-nvmrc() {
 }
 # add-zsh-hook chpwd load-nvmrc
 eval "$(/home/yasu/.local/bin/mise activate zsh)"
-
-source "$HOME/.local/share/../bin/env"
+# source "$HOME/.local/share/../bin/env"

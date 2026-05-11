@@ -1,9 +1,9 @@
 # PATH settings
 #export PATH="/home/yasu/anaconda3/bin:$PATH"
 
-[ -f $HOME/venv/base313/bin/activate ] && source $HOME/venv/base313/bin/activate
+# [ -f $HOME/venv/base313/bin/activate ] && source $HOME/venv/base313/bin/activate
 # export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
-export PATH="$HOME/dotfiles/bin:$PATH"
+# export PATH="$HOME/dotfiles/bin:$PATH"
 export PATH="$HOME/.config/emacs/bin:$PATH"
 export PATH="$HOME/.local/share/cargo/bin:$PATH"
 # xdg
@@ -19,7 +19,7 @@ export CARGO_HOME="$XDG_DATA_HOME"/cargo
 export PATH="$HOME/.local/bin:$PATH"
 # export PATH="$HOME/go/bin:$PATH"
 export PATH="$PATH:/usr/local/go/bin"
-export PATH="$HOME/node-v20.16.0-linux-x64/bin:$PATH"
+# export PATH="$HOME/node-v20.16.0-linux-x64/bin:$PATH"
 [ -f "$XDG_DATA_HOME/ghcup/env" ] && source "$XDG_DATA_HOME/ghcup/env" # ghcup-env
 # . "$CARGO_HOME/env"
 # export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
@@ -48,13 +48,13 @@ export XINITRC="$XDG_CONFIG_HOME"/X11/xinitrc
 export GHCUP_USE_XDG_DIRS=true 
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg 
 
-export ANDROID_USER_HOME="$XDG_DATA_HOME/android"
-alias adb='HOME="$XDG_DATA_HOME"/android adb'
+# export ANDROID_USER_HOME="$XDG_DATA_HOME/android"
+# alias adb='HOME="$XDG_DATA_HOME"/android adb'
 
 export WINEPREFIX="$XDG_DATA_HOME"/wine
 
 #export NVM_DIR="$HOME/.local/share/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # from manjaro init settings
 #!/bin/sh
@@ -63,27 +63,27 @@ export EDITOR=nvim
 
 # Most pure GTK3 apps use wayland by default, but some,
 # such as Firefox, require the backend to be explicitly selected.
-export MOZ_ENABLE_WAYLAND=1
-export MOZ_DBUS_REMOTE=1
-export GTK_CSD=0
+# export MOZ_ENABLE_WAYLAND=1
+# export MOZ_DBUS_REMOTE=1
+# export GTK_CSD=0
 
 # qt wayland
-export QT_QPA_PLATFORM="wayland"
-export QT_QPA_PLATFORMTHEME=qt5ct
-export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+# export QT_QPA_PLATFORM="wayland"
+# export QT_QPA_PLATFORMTHEME=qt5ct
+# export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
 
 #Java XWayland blank screens fix
-export _JAVA_AWT_WM_NONREPARENTING=1
+# export _JAVA_AWT_WM_NONREPARENTING=1
 
 # set default shell and terminal
 export SHELL=/usr/bin/zsh
 export TERMINAL_COMMAND=xdg-terminal-exec
 
 # add default location for zeit.db
-export ZEIT_DB="$HOME/.config/zeit.db"
+# export ZEIT_DB="$HOME/.config/zeit.db"
 
 # set ozone platform to wayland
-export ELECTRON_OZONE_PLATFORM_HINT=wayland
+# export ELECTRON_OZONE_PLATFORM_HINT=wayland
 
 # Disable hardware cursors. This might fix issues with
 # disappearing cursors
@@ -117,5 +117,3 @@ export XMODIFIERS=@im=fcitx
 export PATH="$HOME/.elan/bin:$PATH"
 # golang
 export PATH="$HOME/go/bin:$PATH"
-
-export PATH="$PATH:$HOME/.local/share/../bin/env"

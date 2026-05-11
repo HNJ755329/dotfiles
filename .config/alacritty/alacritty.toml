@@ -2,17 +2,19 @@
 		#"~/.config/alacritty/themes/themes/alacritty_0_12.toml"
 #]
 
-# [font.normal]
+[font.normal]
 # family = "MesloLGS NF"
 # for powerline10k
+# family = "FiraCode Nerd Font" # Replace with your installed font name
+# style = "Regular"
 
 [general]
 import = [
-    "~/.config/alacritty/themes/themes/github_light.toml"
+    "~/.config/alacritty/themes/themes/github_dark.toml"
 ]
 
 [env]
-#TERM = "alacritty"
+TERM = "alacritty"
 
 [scrolling]
 history = 10000
@@ -35,3 +37,8 @@ padding = {x = 10, y = 10}
 #bindings = [
    #{ key = "Return", mods = "Control|Shift", action = "SpawnNewInstance" }
 #]
+
+[keyboard]
+# Ctrl + Shift + Space で Vi モード開始（デフォルト）
+# これを i3 や Neovim と被らないキーに変更できます
+bindings = [{ key = "V", mods = "Control", action = "ToggleViMode" }]

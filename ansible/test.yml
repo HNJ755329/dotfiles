@@ -1,0 +1,18 @@
+- name: test
+  hosts: localhost
+  # gather_facts: yes  # これが true (デフォルト) なら ansible_env が使えます
+  vars:
+    ghq: ghq/github.com
+    user: HNJ75529
+    repository: dotfiles
+
+  tasks:
+    - name: setpath
+      ansible.builtin.set_fact:
+        path: "{{ ansible_env.HOME }}/{{ ghq }}/{{ user }}/{{ repository }}"
+    - name: debug
+      debug:
+        msg: "link is {{ item.src }} to {{ item.dest }}"
+      loop:
+        - { src: "{{ path }}/.config/nvim", dest: "{{ ansible_env.HOME }}/.config/nvim" }
+        - { src: "{{ path }}/.config/zsh", dest: "{{ ansible_env.HOME }}/.config/zsh" }
