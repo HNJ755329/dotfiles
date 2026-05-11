@@ -88,11 +88,8 @@ rustc-hash="1.1.0"
 
 # source code template
 template = """
-use proconio::{fastout, input};
-
-#[fastout]
 fn main() {
- input!{
+ proconio::input!{
   n:usize,
   a:[i64;n]
  }
