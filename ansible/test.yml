@@ -14,5 +14,14 @@
       debug:
         msg: "link is {{ item.src }} to {{ item.dest }}"
       loop:
-        - { src: "{{ path }}/.config/nvim", dest: "{{ ansible_env.HOME }}/.config/nvim" }
+        - { src: "{{ path }}/.config/alacritty", dest: "{{ ansible_env.HOME }}/.config/alacritty" }
         - { src: "{{ path }}/.config/zsh", dest: "{{ ansible_env.HOME }}/.config/zsh" }
+        - { src: "{{ path }}/.config/clangd", dest: "{{ ansible_env.HOME }}/.config/clangd" }
+        - { src: "{{ path }}/.config/emacs", dest: "{{ ansible_env.HOME }}/.config/emacs" }
+        - { src: "{{ path }}/.config/git", dest: "{{ ansible_env.HOME }}/.config/git" }
+        - { src: "{{ path }}/.config/gwq", dest: "{{ ansible_env.HOME }}/.config/gwq" }
+        - { src: "{{ path }}/.config/i3", dest: "{{ ansible_env.HOME }}/.config/i3" }
+        - { src: "{{ path }}/.config/nvim", dest: "{{ ansible_env.HOME }}/.config/nvim" }
+        - { src: "{{ path }}/.config/tmux", dest: "{{ ansible_env.HOME }}/.config/tmux" }
+        - { src: "{{ path }}/.config/zsh", dest: "{{ ansible_env.HOME }}/.config/zsh" }
+        - { src: "{{ path }}/.config/cargo-atcoder.toml", dest: "{{ ansible_env.HOME }}/.config/cargo-atcoder.toml" }
