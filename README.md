@@ -1,8 +1,8 @@
 # dotfiles
 
-shell scriptからAnsible での管理に移行.
-make install: apt install, cargo install, go installなどが走る.
-make link: .config/ファイルにリンクを貼る.
+shell scriptからAnsible での管理に移行.<br>
+make install: apt install, cargo install, go installなどが走る.<br>
+make link: .config/ファイルにリンクを貼る.<br>
 
 ```
 $ sudo apt-get update && apt-get install -y make git sudo curl ansible
@@ -13,10 +13,10 @@ $ make link
 実行する前に-check,-diffで実際の変更を確認できる.
 
 ```
-make install-check
-make install-diff
-make link-check
-make link-diff
+$ make install-check
+$ make install-diff
+$ make link-check
+$ make link-diff
 ```
 
 以前使用していたものはarchive/に移動.
@@ -69,18 +69,18 @@ Doom Emacs による日本語入力を検討中.
 
 ## i3
 
-一般的なWindows keyをSuperとして使用.
-windows manager として普通のkey bindingsを設定.
+一般的なWindows keyをSuperとして使用.<br>
+windows manager として普通のkey bindingsを設定.<br>
 
-Super+Return exec alacritty
-Super+shift+q kill
-Super+Escape exec systemctl suspend
-
-Super+s layout stacking
-Super+w layout tabbed
-Super+e layout toggle split
-
-Super+h focus left
-Super+j focus down
-Super+k focus up
-Super+l focus right
+| key           | actions                |
+| ------------- | ---------------------- |
+| Super+Return  | exec alacritty         |
+| Super+shift+q | kill                   |
+| Super+Escape  | exec systemctl suspend |
+| Super+s       | layout stacking        |
+| Super+w       | layout tabbed          |
+| Super+e       | layout toggle split    |
+| Super+h       | focus left             |
+| Super+j       | focus down             |
+| Super+k       | focus up               |
+| Super+l       | focus right            |
