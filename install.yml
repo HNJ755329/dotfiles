@@ -64,10 +64,16 @@
       args:
         creates: "{{ ansible_env.HOME }}/.cargo/bin/rustup"
 
+    - name: Add cargo to PATH
+      set_fact:
+        cargo_bin: "{{ ansible_env.HOME }}/.cargo/bin"
+
     - name: Install Cargo packages
       community.general.cargo:
         name: "{{ item }}"
         state: present
+      environment:
+        PATH: "{{ cargo_bin }}:{{ ansible_env.PATH }}"
       loop: "{{ cargo_packages }}"
       # インストール先を明示的に指定する場合
       # path: ~/.local
