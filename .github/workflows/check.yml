@@ -9,11 +9,11 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: Install required packages
-        run: apt-get update && apt-get install -y git sudo curl
+        run: apt-get update && apt-get install -y git sudo curl ansible
       - name: Install util packages
-        run: ./install.sh
+        run: make install
       - name: Install dotfiles
-        run: ./setup/setup.sh
+        run: make link
   # arch:
   #   runs-on: ubuntu-latest
   #   container: archlinux:latest
