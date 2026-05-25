@@ -12,3 +12,5 @@ auto-save-list/
 .zzcompdump*
 .zsh_history
 .zsh_sessions/
+
+.obsidian
