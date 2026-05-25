@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: Install required packages
-        run: apt-get update && apt-get install -y git sudo curl ansible
+        run: apt-get update && apt-get install -y make git sudo curl ansible
       - name: Install util packages
         run: make install
       - name: Install dotfiles
