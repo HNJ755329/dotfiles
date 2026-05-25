@@ -28,6 +28,7 @@
       - universal-ctags 
       - eza 
       - zoxide 
+      - golang
       # - cargo 
       # - rustup 
 
