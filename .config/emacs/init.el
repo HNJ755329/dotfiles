@@ -3,13 +3,13 @@
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 (package-initialize)
-(global-display-line-numbers-mode t)
+(setq global-display-line-numbers-mode nil)
 (global-hl-line-mode t)
 ;; (set-face-background 'hl-line "#00FF00")
 ;; (set-face-foreground 'hl-line "#FF0000")
 ;; Disable GUI
-(tool-bar-mode t)
-(menu-bar-mode t)
+(setq tool-bar-mode nil)
+(setq menu-bar-mode nil)
 (setq use-dialog-box t)
 (setq use-file-dialog t)
 (setq-default frame-title-format '("%b  -  GNU Emacs")) 

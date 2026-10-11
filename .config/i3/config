@@ -12,7 +12,7 @@ for_window [class="matplotlib"] floating enable
 workspace_layout tabbed
 
 set $mod Mod4
-gaps inner 10px
+# gaps inner 10px
 gaps outer 10px
 # gaps bottom 150px
 
@@ -34,7 +34,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
-exec --no-startup-id fcitx
+# exec --no-startup-id fcitx
 # exec --no-startup-id xrandr --output HDMI-1 --rotate right
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -51,7 +51,7 @@ bindsym XF86AudioMicMute exec --no-startup-id set Capture toggle
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
 exec --no-startup-id feh --bg-scale --randomize $HOME/.wallpaper
-exec --no-startup-id picom -b
+# exec --no-startup-id picom -b
 
 # use these keys for focus, movement, and resize directions when reaching for
 # the arrows is not convenient

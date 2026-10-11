@@ -25,3 +25,8 @@ alias kl='kaggle c list --sort-by latestDeadline'
 alias tree=' eza --long --tree --level=2'
 alias treee=' eza --long --tree --level=3'
 alias ghqcd=" cd \$(ghq root)/\$(ghq list | fzf)"
+
+# Doom Emacs の起動用（環境変数と初期化ディレクトリをXDGに固定）
+alias doom='EMACSDIR=~/.config/doom-emacs DOOMDIR=~/.config/doom DOOMLOCALDIR=~/.local/share/doom-emacs emacs --init-directory=~/.config/doom-emacs'
+# Lisp有効化などの設定変更を反映する同期コマンド用
+alias dsync='EMACSDIR=~/.config/doom-emacs DOOMDIR=~/.config/doom DOOMLOCALDIR=~/.local/share/doom-emacs ~/.config/doom-emacs/bin/doom sync'
